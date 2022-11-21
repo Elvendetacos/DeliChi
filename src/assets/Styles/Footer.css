@@ -1,0 +1,49 @@
+footer{
+    width: 100%;
+    height: 60px;
+    background-color: #2ACD53;
+}
+
+footer > .imagen-footer{
+    margin-left: 32px;
+    margin-right: 32px;
+    height: 100%;
+    display: grid;
+    grid-gap: 32px;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(1, 100%);
+    grid-template-areas: 
+    ". . . . . Facebook Instagram Twitter";
+}
+
+.Facebook{
+    margin-top: 10px;
+    width: 100%;
+    height: 70%;
+    object-fit: contain;
+    grid-area: Facebook;
+}
+
+.Instagram{
+    margin-top: 10px;
+    width: 100%;
+    height: 70%;
+    object-fit: contain;
+    grid-area: Instagram;
+}
+
+.Twitter{
+    margin-top: 10px;
+    width: 100%;
+    height: 70%;
+    object-fit: contain;
+    grid-area: Twitter;
+}
+
+@media screen and (max-width: 870px) {
+    footer > .imagen-footer{
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-areas: 
+        " . Facebook Instagram Twitter .";
+    }
+}

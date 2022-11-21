@@ -1,0 +1,33 @@
+nav{
+    display: flex;
+    width: 100%;
+    height: 25px;
+    background-color: #2ACD53;
+}
+
+.ingresar{
+    margin-left: 80%;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ingresar p{
+    cursor: pointer;
+}
+
+.iniciarSesion{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iniciarSesion p{
+    cursor: pointer;
+}
+
+

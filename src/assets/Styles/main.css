@@ -1,0 +1,10 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Readex';
+}
+
+@font-face {
+    font-family: Readex;
+    src: url("../Fonts/ReadexPro-Regular.ttf");
+}

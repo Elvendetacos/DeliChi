@@ -1,0 +1,95 @@
+.back-modal-business{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.modal-business{
+    width: 35%;
+    height: 70%;
+    border-radius: 30px;
+    background-color: #2ACD53;
+    box-shadow: 2px 2px 2px black;
+}
+
+.cancel-model{
+    width: 100%;
+    height: 10%;
+}
+
+.cancel-model img{
+    width: 10%;
+    height: 50%;
+    margin-top: 10px;
+    margin-left: 90%;
+    cursor: pointer;
+}
+
+.model-datos{
+    width: 100%;
+    height: 85%;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 5fr);
+}
+
+.model-datos p{
+    grid-column-start: 2;
+    display: flex;
+    justify-content: start;
+    align-items:center;
+    font-size: 1.5em;
+}
+
+.model-datos input{
+    border-radius: 10px;
+    height: 60%;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+.correo-modal{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+}
+
+.contra-modal{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 4;
+}
+
+.submit-button{
+    width: 70%;
+    height: 70%;
+    margin-left: 15%;
+    margin-top: 10px;
+    border-radius: 30px;
+    border: none;
+    background-color: #252323;
+    color: white;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 5;
+    box-shadow: 2px 2px black;
+    position: relative;
+    transition: all 0.5s;
+
+}
+
+.submit-button:active{
+    top:2px;
+    transition: all 0.5s;
+    box-shadow: none;
+}
+

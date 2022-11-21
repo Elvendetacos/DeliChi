@@ -1,0 +1,134 @@
+.back-modalmenu{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    background-color: rgba(0, 0, 0, 0.507);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+.front-modalmenu{
+    width: 40%;
+    height: 70%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px black;
+    background-color: #2ACD53;
+}
+
+.conteiner-modal-menu{
+    width: 90%;
+    margin-left: 5%;
+    height: 20%;
+}
+
+.conteiner-modal-menu form{
+    width: 100%;
+    height: 100%;
+}
+
+.conteiner-modal-menu-1{
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+    grid-template-rows: repeat(3, 3fr);
+    width: 100%;
+    height: 100%;
+}
+
+.conteiner-modal-menu-1 p{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.conteiner-modal-menu-1 button{
+    width: 90%;
+    margin-left: 5%;
+    height: 100%;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #252323;
+    color: white;
+    grid-column-start: 3;
+    grid-row-start: 2;
+}
+
+.platillo{
+    grid-column-start: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.precio{
+    grid-column-start: 2;
+    grid-row-start: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.opciones{
+    width: 90%;
+    margin-left: 5%;
+    height: 10%;
+}
+
+.opciones button{
+    width: 20%;
+    height: 70%;
+    border-radius: 5px;
+    background: #252323;
+    cursor: pointer;
+    border: none;
+    color: white;
+    margin-left: 40%;
+}
+
+.data-platillo{
+    width: 90%;
+    height: 100%;
+    margin-left: 5%;
+    grid-column-start: 1;
+    border-radius: 10px;
+    border: none;
+
+}
+
+.data-precio{
+    width: 90%;
+    height: 100%;
+    margin-left: 5%;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    border-radius: 10px;
+    border: none;
+}
+
+.table-menu{
+    width: 90%;
+    margin-left: 5%;
+    text-align: center;
+    height: 70%;
+    border-collapse: separate;
+}
+
+.table-menu button{
+    width: 80%;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: red;
+    margin-left: 10%;
+    height: 25px;
+}
+
