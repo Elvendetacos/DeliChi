@@ -1,0 +1,145 @@
+.backRestaurant{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+.frontRestaurant{
+    width: 45%;
+    height: 90%;
+    border-radius: 5px;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+.image-banner-restaurant{
+    width: 95%;
+    margin-left: 2.5%;
+    height: 200px;
+}
+
+.image-banner-restaurant img{
+    width: 100%;
+    height: 100%;
+}
+
+.restaurant-name-in{
+    width: 95%;
+    margin-left: 2.5%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+    border-bottom: 1px black solid;
+    border-top: 1px black solid;
+}
+
+.data-restaurant{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 95%;
+    margin-left: 2.5%;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    grid-template-rows: repeat(2, 2fr);
+    gap: 10px;
+}
+
+.direccion-zone{
+    width: 100%;
+    height: 100%;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.Horario{
+    width: 100%;
+    height: 100%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    grid-template-rows: repeat(8, 8fr);
+}
+
+.dias{
+    grid-column-start: 1;
+}
+
+
+.Menu{
+    width: 100%;
+    height: 100%;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    grid-template-rows: repeat(4, auto);
+}
+
+.menu-title{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.cancel-button{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+    position: sticky;
+    top: 0%;
+    background-color: white;
+}
+
+.cancel-button img{
+    width: 10%;
+    margin-left: 90%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.Reservations-button{
+    width: 95%;
+    margin-left: 2.5%;
+    height: 100px;
+    border-top: 1px black solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Reservations-button button{
+    width: 30%;
+    height: 40%;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    background-color: #252323;
+    cursor: pointer;
+}
+
+.photos-restaurant{
+    width: 95%;
+    margin-left: 2.5%;
+    height: 300px;
+    margin-top: 10px;
+    background-color: chartreuse;
+}
+
+
+
+

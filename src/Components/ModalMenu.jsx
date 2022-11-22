@@ -3,10 +3,10 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import MenuTable from "./MenuTable";
 import FormTableMenu from "./FormTableMenu";
+import Modal from "../Conteiners/Modal";
 
-function ModalMenu({menuModal, setMenuModal}) {
-  const data = [
-  ];
+function ModalMenu({ menuModal, setMenuModal }) {
+  const data = [];
 
   const [menu, setMenu] = useState(data);
   console.log(menu);
@@ -17,23 +17,20 @@ function ModalMenu({menuModal, setMenuModal}) {
     setMenu([...menu, menus]);
   };
 
-  const deleteUser = (id) =>{
-    const Filter = menu.filter( menu => menu.id != id)
-    setMenu(Filter)
-  }
-
+  const deleteUser = (id) => {
+    const Filter = menu.filter((menu) => menu.id != id);
+    setMenu(Filter);
+  };
 
   return (
     <>
-      <div className="back-modalmenu">
-        <div className="front-modalmenu">
-          <FormTableMenu addMenu={addMenu} />
-          <MenuTable menu={menu} deleteUser={deleteUser}/>
-          <div className="opciones">
-            <button onClick={()=>setMenuModal(!menuModal)}>Aceptar</button>
-          </div>
+      <Modal>
+        <FormTableMenu addMenu={addMenu} />
+        <MenuTable menu={menu} deleteUser={deleteUser} />
+        <div className="opciones">
+          <button onClick={() => setMenuModal(!menuModal)}>Aceptar</button>
         </div>
-      </div>
+      </Modal>
     </>
   );
 }

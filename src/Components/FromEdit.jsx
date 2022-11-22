@@ -6,7 +6,7 @@ import CardImage from "../Cards/CardImage";
 const imageType = /image\/(png|jpg|jpeg|svg)/i;
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
-function FromEdit({menuModal, setMenuModal}) {
+function FromEdit({setHorarioModal, setMenuModal, setEstabModal}) {
   const [profile, setProfile] = useState(null);
   const [fileDataURL, setFileDataURL] = useState(null);
   const [banner, setBanner] = useState(null);
@@ -242,14 +242,16 @@ function FromEdit({menuModal, setMenuModal}) {
                   type="button"
                   className="input-5"
                   value="Agregar Horarios"
+                  onClick={()=> setHorarioModal(true)}
                 />
                 <p className="data-6">Menú:</p>
-                <input type="button" className="input-6" value="Agregar Menú" onClick={()=> setMenuModal(!menuModal)} />
+                <input type="button" className="input-6" value="Agregar Menú" onClick={()=> setMenuModal(true)} />
                 <p className="data-7">Alojamiento:</p>
                 <input
                   type="button"
                   className="input-7"
                   value="Agregar Alojamiento"
+                  onClick={()=> setEstabModal(true)}
                 />
                 <p className="data-8">Zona:</p>
                 <select className="input-8">

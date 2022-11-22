@@ -1,0 +1,44 @@
+.establecimiento-modal{
+    width: 80%;
+    height: 80%;
+    margin-left: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.options-establecimiento{
+    width: 80%;
+    height: 20%;
+    margin-left: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.options-establecimiento button{
+    width: 30%;
+    height: 40%;
+    border-radius: 7px;
+    background-color: #252323;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.input-establecimiento{
+    width: 50%;
+    height: 50%;
+}
+
+.input-establecimiento input{
+    height: 15%;
+    width: 100%;
+    border-radius: 7px;
+    border: none;
+}
+
+.input-establecimiento p{
+    font-size: 1.3em;
+    margin-top: 30px;
+}

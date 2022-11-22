@@ -1,13 +1,13 @@
 import '../assets/Styles/Nav.css'
 
-function Nav() {
+function Nav({setRegister, setLogin}) {
     return (
       <nav>
         <div className="ingresar">
-          <p>Ingresar</p>
+          <p onClick={()=>setRegister(true)}>Ingresar</p>
         </div>
         <div className="iniciarSesion">
-          <p>Iniciar Sesión</p>
+          <p onClick={()=>setLogin(true)}>Iniciar Sesión</p>
         </div>
       </nav>
     );

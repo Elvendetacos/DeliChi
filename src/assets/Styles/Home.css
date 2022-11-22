@@ -1,0 +1,178 @@
+.slides-section{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.restaurants-section{
+    width: 100%;
+    height: auto;
+}
+
+.locality-section{
+    width: 95%;
+    margin-left: 2.5%;
+    height: auto;
+    border-top: 1px black solid;
+}
+
+.slider-conteiner{
+    width: 60%;
+    height: 70%;
+    display: flex;
+}
+
+.anterior{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5em;
+}
+
+.anterior p{
+    cursor: pointer;
+}
+
+.slider-bar{
+    width: 80%;
+    height: 100%;
+    background-color: violet;
+}
+
+.siguiente{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5em;
+}
+
+.siguiente p{
+    cursor: pointer;
+}
+
+.conteiner-view-restaurants{
+    width: 60%;
+    height: 100%;
+    margin-left: 20%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 15px;
+}
+
+.conteiner-view-localidad{
+    width: 70%;
+    height: 100%;
+    margin-left: 15%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 30px;
+}
+
+.card-restaurant{
+    width: 100%;
+    height: 300px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px black;
+    background-color: white;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.card-restaurant:hover{
+    bottom: 10px;
+    width: 100%;
+    height: 310px;
+    z-index: 1;
+    box-shadow: 4px  4px 10px black;
+}
+
+.img-restaurant{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-restaurant img{
+    object-fit: fill;
+    width: 70%;
+    height: 90%;
+}
+
+.ranked-restaurant{
+    width: 100%;
+    height: 25%;
+}
+
+.name-restaurant{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name-restaurant p{
+    font-size: 1.2em;
+}
+
+.restaurants-in{
+    width: 80%;
+    margin-left: 10%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-style: oblique;
+}
+
+.municipios{
+    width: 80%;
+    margin-left: 10%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-style: oblique;
+}
+
+.card-municipio{
+    width: 100%;
+    height: 300px;
+    background-color: black;   
+}
+
+.municipio-img{
+    height: 100%;
+    height: 60%;
+}
+
+.municipio-img img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.titulo-municipio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40%;
+    font-size: 2em;
+    color: white;
+}
