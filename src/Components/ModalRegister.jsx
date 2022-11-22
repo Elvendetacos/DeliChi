@@ -1,10 +1,36 @@
 import "../assets/Styles/ModalRegister.css";
 import Cancel from "../assets/Img/cancel.svg";
 import { useRef } from "react";
-import Modal from "../Conteiners/Modal";
 
 function ModalRegister({setRegister}) {
   const slider = useRef(null);
+  const form = useRef(null)
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(form.current);
+    fetch("http://localhost:8080/user", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+      email:formData.get("email"),
+      name:formData.get("name"),
+      lastName:formData.get("lastname"),
+      phoneNumber:formData.get("phone"),
+      password:formData.get("password")
+        }),
+      })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
 
   const siguiente = () => {
     const primerElemento = slider.current.children[0];
@@ -27,17 +53,17 @@ function ModalRegister({setRegister}) {
           <div className="cancel-button-user">
             <img src={Cancel} alt="" onClick={()=>setRegister(false) }/>
           </div>
-          <form>
+          <form onSubmit={handleSubmit} ref={form}>
             <div className="slider-conteiner-user" ref={slider}>
               <div className="slider-section-1">
                 <div className="data-register">
                   <div className="data-conteiner-1">
                     <p>Nombre: </p>
-                    <input type="text" />
+                    <input type="text" name="name"/>
                     <p>Apellido: </p>
-                    <input type="text" />
+                    <input type="text" name="lastname"/>
                     <p>Telefono: </p>
-                    <input type="number" />
+                    <input type="number" name="phone"/>
                   </div>
                 </div>
                 <div className="button-user">
@@ -50,9 +76,9 @@ function ModalRegister({setRegister}) {
                 <div className="data-register">
                   <div className="data-conteiner-1">
                     <p>Email: </p>
-                    <input type="text" />
+                    <input type="text" name="email"/>
                     <p>Password: </p>
-                    <input type="password" />
+                    <input type="password" name="password"/>
                   </div>
                 </div>
                 <div className="button-user-1">

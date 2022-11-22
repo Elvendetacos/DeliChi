@@ -8,6 +8,7 @@ import Img1 from '../assets/Img/placeholder1.jpg'
 import Img2 from '../assets/Img/placeholder2.jpg'
 import Img3 from '../assets/Img/placeholder3.jpg'
 import Img4 from '../assets/Img/placeholder4.jpg'
+import { useEffect } from "react";
 
 
 function FromHome({setRestaurant}) {
@@ -61,6 +62,30 @@ function FromHome({setRestaurant}) {
     }
   ]
   
+  useEffect(()=>{
+    fetch(`http://localhost:8080/zone/1/restaurants`, {
+      method: "GET",
+      headers: {
+        Accept: "aplication/json",
+        "Content-Type": "Aplication/json",
+      },
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((respuesta) => setState(respuesta.data))
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    
+  })
 
   return (
     <>

@@ -1,6 +1,40 @@
 import "../assets/Styles/BusinessRegister.css";
+import { useRef } from "react";
 
 function ForRegisterB({estado, cambiarEstado}) {
+
+  const form = useRef(null);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(form.current);
+
+  fetch("http://localhost:8080/ceo", {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email:formData.get("email"),
+      name:formData.get("name"),
+      firstSurname:formData.get("firstname"),
+      secondSurname:formData.get("secondname"),
+      phoneNumber:formData.get("phone"),
+      password:formData.get("password")
+        }),
+  })
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
+}
+  
   return (
     <>
       <div className="conteiner-father">
@@ -25,24 +59,26 @@ function ForRegisterB({estado, cambiarEstado}) {
           </div>
         </div>
         <div className="conteiner-Register-2">
+          <form onSubmit={handleSubmit} ref={form}>
             <div className="formulario-A">
                 <div className="formulario-B">
                     <p>Nombre: </p>
-                    <input type="text" name="" id="" />
+                    <input type="text" name="name" />
                     <p>Apellido Paterno: </p>
-                    <input type="text" name="" id="" />
+                    <input type="text" name="firstname"/>
                     <p>Apellido Materno: </p>
-                    <input type="text" name="" id="" />
+                    <input type="text" name="secondname" />
                     <p>Email: </p>
-                    <input type="email" name="" id="" />
+                    <input type="email" name="email"/>
                     <p>Teléfono: </p>
-                    <input type="number" min="1" name="" id="" />
+                    <input type="number" min="1" name="phone"/>
                     <p>Contraseña: </p>
-                    <input type="password" name="" id="" />
+                    <input type="password" name="password"/>
                     <button className="RegisterBus">Enviar</button>
-                    <button className="LoginBus" onClick={()=>cambiarEstado(!estado)}>Iniciar Sesión</button>
+                    <button className="LoginBus" type="button" onClick={()=>cambiarEstado(!estado)}>Iniciar Sesión</button>
                 </div>
             </div>
+          </form>
         </div>
       </div>
     </>
