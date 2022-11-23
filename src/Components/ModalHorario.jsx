@@ -51,37 +51,37 @@ function ModalHorario({ setHorarioModal, hora, setHora }) {
   const handlesubmit = (e) => {
     cadenaxd();
     e.preventDefault();
-    const Horarios = {
-      horario:
-        horaLunes.current.value +
-        "-" +
-        horaLunes2.current.value +
-        "," +
-        horaMartes.current.value +
-        "-" +
-        horaMartes2.current.value +
-        "," +
-        horaMiercoles.current.value +
-        "-" +
-        horaMiercoles2.current.value +
-        "," +
-        horaJueves.current.value +
-        "-" +
-        horaJueves2.current.value +
-        "," +
-        horaViernes.current.value +
-        "-" +
-        horaViernes2.current.value +
-        "," +
-        horaSabado.current.value +
-        "-" +
-        horaSabado2.current.value +
-        "," +
-        horaDomingo.current.value +
-        "-" +
-        horaDomingo2.current.value,
-    };
-    setHora(JSON.stringify(Horarios.horario))
+
+    const Liz =         
+    horaLunes.current.value +
+    "-" +
+    horaLunes2.current.value +
+    "," +
+    horaMartes.current.value +
+    "-" +
+    horaMartes2.current.value +
+    "," +
+    horaMiercoles.current.value +
+    "-" +
+    horaMiercoles2.current.value +
+    "," +
+    horaJueves.current.value +
+    "-" +
+    horaJueves2.current.value +
+    "," +
+    horaViernes.current.value +
+    "-" +
+    horaViernes2.current.value +
+    "," +
+    horaSabado.current.value +
+    "-" +
+    horaSabado2.current.value +
+    "," +
+    horaDomingo.current.value +
+    "-" +
+    horaDomingo2.current.value;
+    
+    setHora(Liz)
     setHorarioModal(false)
   };
 

@@ -8,9 +8,61 @@ import Img1 from "../assets/Img/placeholder1.jpg";
 import Img2 from "../assets/Img/placeholder2.jpg";
 import Img3 from "../assets/Img/placeholder3.jpg";
 import Img4 from "../assets/Img/placeholder4.jpg";
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 
-function FromHome({ setRestaurant }) {
+function FromHome({ setRestaurant , setId}) {
+
+  const [zone, setZone] = useState([])
+  const [zoneName, setZoneName] = useState([])
+
+  useEffect(()=>{
+    fetch(`http://localhost:8080/zone/3/restaurants/`, {
+      method: "GET", headers: {
+          Accept: "aplication/json",
+          "Content-Type": "Aplication/json"
+      }, mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+      },
+
+  })
+      .then((response) => {return response.json()})
+      .then((respuesta => setZone(respuesta.data)))
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+      Fetch2()
+  }, [1])
+
+  const Fetch2 = () =>{
+    fetch(`http://localhost:8080/zone/3/`, {
+      method: "GET", headers: {
+          Accept: "aplication/json",
+          "Content-Type": "Aplication/json"
+      }, mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+      },
+
+  })
+      .then((response) => {return response.json()})
+      .then((respuesta => setZoneName(respuesta.data)))
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+  }
+
+  const Resta = (id) =>{
+    setId(id)
+    setRestaurant(true)
+  }
+
   const slider = [
     {
       Img: Img1,
@@ -99,19 +151,19 @@ function FromHome({ setRestaurant }) {
       </div>
       <div className="restaurants-section">
         <div className="restaurants-in">
-          <p>Restaurantes en {Zone.zone}</p>
+          <p>Restaurantes en {zoneName.name}:</p>
         </div>
         <div className="conteiner-view-restaurants">
-          {Restaurant.map((restaurante) => (
+          {zone.map((restaurante) => (
             <div
               className="card-restaurant"
-              onClick={() => setRestaurant(true)}
+              onClick={()=>Resta(restaurante.id)}
             >
               <div className="img-restaurant">
-                <img src={restaurante.Img} alt="" />
+                <img src={Rafa} alt="" />
               </div>
               <div className="name-restaurant">
-                <p>{restaurante.Name}</p>
+                <p>{restaurante.name}</p>
               </div>
               {/* Aqui es para las estrellas previzualizadas del restaurante */}
               <div className="ranked-restaurant"></div>

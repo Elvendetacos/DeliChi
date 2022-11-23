@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { useNavigate } from 'react-router';
 
 
-function ModalLogin({setLogin}) {
+function ModalLogin({setLogin, setIdUser}) {
 
   const password = useRef(null);
   const email = useRef(null);
@@ -31,19 +31,21 @@ function ModalLogin({setLogin}) {
           .then((respuesta =>{
               const apiId=(respuesta.data.id);
               const apiPassword=(respuesta.data.password);
+              const apiName=(respuesta.data.name);
               console.log(respuesta.data)
-              validacion(contrasena, apiPassword)
+              validacion(contrasena, apiId ,apiPassword, apiName)
           }))
           .catch((error) => {
               console.error('Error:', error);
           });
+          setLogin(false)
   }
 
-  function validacion(passwordLogin, apiPassword) {
+  function validacion(passwordLogin, api1, apiPassword, apiName) {
       if (apiPassword == passwordLogin) {
-          //cambiarid(id1);
+          setIdUser(api1)
           console.log(passwordLogin)
-          alert("si pasa")
+          alert("Bienvenido "+apiName+" :D")
       } else if (apiPassword != passwordLogin) {
           console.log(passwordLogin)
           alert("Contraseña no valida")

@@ -11,8 +11,6 @@ const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
 function FromEdit({setHorarioModal, setMenuModal, setEstabModal, menu, hora, numberTable, capacityTable }) {
 
-  const navigate = useNavigate()
-
   const profile1 = useRef(null)
 
   const MenuF = JSON.stringify(menu)
@@ -373,7 +371,7 @@ function FromEdit({setHorarioModal, setMenuModal, setEstabModal, menu, hora, num
             </div>
           </div>
           <div className="conteiner-options">
-            <button type="button" onClick={mover()}>Regresar</button>
+            <button type="button">Regresar</button>
             <button type="button">Editar</button>
             <button type="submit">Guardar Datos</button>
           </div>

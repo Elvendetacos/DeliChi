@@ -1,7 +1,7 @@
 import "../assets/Styles/AddReservation.css";
 import { useEffect, useState, useRef } from "react";
 
-function AddReservation({setModal}) {
+function AddReservation({setModal, idUser, idRestaurant}) {
     var today = new Date();
     const [state, setState] = useState()
     const [dataValue, setDataValue] = useState()
@@ -13,7 +13,7 @@ function AddReservation({setModal}) {
       event.preventDefault();
       const formData = new FormData(form.current);
   
-    fetch(`http://localhost:8080//reservation/user/1/restaurant/3`, {
+    fetch(`http://localhost:8080//reservation/user/${idUser}/restaurant/${idRestaurant}`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -33,6 +33,8 @@ function AddReservation({setModal}) {
     .catch((error) => {
       console.error("Error:", error);
     });
+
+    setModal(false)
   
   }
 
