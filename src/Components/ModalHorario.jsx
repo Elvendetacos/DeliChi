@@ -1,6 +1,7 @@
 import "../assets/Styles/ModalHorario.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Conteiners/Modal";
+import { useRef } from "react";
 
 function ModalHorario({ setHorarioModal }) {
   const [lunes, setLunes] = useState(false);
@@ -10,33 +11,64 @@ function ModalHorario({ setHorarioModal }) {
   const [viernes, setViernes] = useState(false);
   const [sabado, setSabado] = useState(false);
   const [domingo, setdomingo] = useState(false);
+  const [hora, setHora] = useState({});
+
+
+  const cadenaxd = () =>{
+    let array = new Array();
+    array = [horaLunes, horaMartes, horaMiercoles, horaJueves, horaViernes, horaSabado, horaDomingo]
+    let array2 = new Array();
+    array2 = [horaLunes2, horaMartes2, horaMiercoles2, horaJueves2, horaViernes2, horaSabado2, horaDomingo2]
+    for(let i=0; i<array.length; i++){
+      if(array[i].current.value === "cerrado" || array2[i].current.value === "cerrado"){
+        array2[i].current.value="cerrado"
+        array[i].current.value="cerrado"
+      }else{
+        console.log("na' de na'")
+      }
+    }
+    console.log(horaLunes.current.value)
+    console.log(horaLunes2.current.value)
+  };
+
+  const handlesubmit = (e) => {
+    cadenaxd()
+    e.preventDefault();
+    setHora(
+      {
+        horario: horaLunes.current.value + "-" + horaLunes2.current.value + "," +
+         horaMartes.current.value + "-" + horaMartes2.current.value + "," +
+         horaMiercoles.current.value + "-" + horaMiercoles2.current.value + "," +
+         horaJueves.current.value + "-" + horaJueves2.current.value + "," +
+         horaViernes.current.value + "-" + horaViernes2.current.value + "," +
+         horaSabado.current.value + "-" + horaSabado2.current.value + "," +
+         horaDomingo.current.value + "-" + horaDomingo2.current.value
+
+      }
+    );
+    console.log(hora)
+  };
+
+  useEffect(()=>{
+  },[])
+
+  const horaLunes = useRef();
+  const horaLunes2 = useRef();
+  const horaMartes = useRef();
+  const horaMartes2 = useRef();
+  const horaMiercoles = useRef();
+  const horaMiercoles2 = useRef();
+  const horaJueves = useRef();
+  const horaJueves2 = useRef();
+  const horaViernes = useRef();
+  const horaViernes2 = useRef();
+  const horaSabado = useRef();
+  const horaSabado2 = useRef();
+  const horaDomingo = useRef();
+  const horaDomingo2 = useRef();
 
   const handleChange = (event) => {
     const estado = event.target.value;
-    console.log(estado);
-    switch (estado) {
-      case "1":
-        setLunes(true);
-        break;
-      case "2":
-        setMartes(true);
-        break;
-      case "3":
-        setMiercoles(true);
-        break;
-      case "4":
-        setJueves(true);
-        break;
-      case "5":
-        setViernes(true);
-        break;
-      case "6":
-        setSabado(true);
-        break;
-      case "7":
-        setdomingo(true);
-        break;
-    }
   };
 
   const Horas = [
@@ -103,140 +135,145 @@ function ModalHorario({ setHorarioModal }) {
     {
       hora: "23:00",
       id: "23:00",
-    },
-    {
-      hora: "24:00",
-      id: "24:00",
-    },
+    }
   ];
 
   return (
     <>
       <Modal>
-        <div className="horario">
-          <label>Lunes: </label>
-          <select onChange={handleChange}>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={lunes}>
-                {item.hora}
-              </option>
-            ))}
-          <option value="1">Cerrado</option>
-          </select>{" "}
-          <p>a</p>
-          <select>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={lunes}>
-                {item.hora}
-              </option>
-            ))}
-          </select>
-          <label>Martes: </label>
-          <select  onChange={handleChange}>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={martes}>
-                {item.hora}
-              </option>
-            ))}
-          <option value="2">Cerrado</option>
-          </select>{" "}
-          <p>a</p>
-          <select>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={martes}>
-                {item.hora}
-              </option>
-            ))}
-          </select>
-          <label>Miercoles: </label>
-          <select  onChange={handleChange}>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={miercoles}>
-                {item.hora}
-              </option>
-            ))}
-            <option value="3">Cerrado</option>
-          </select>{" "}
-          <p>a</p>
-          <select>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={miercoles}>
-                {item.hora}
-              </option>
-            ))}
-          </select>
-          <label>Jueves: </label>
-          <select  onChange={handleChange}>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={jueves}>
-                {item.hora}
-              </option>
-            ))}
-             <option value="4">Cerrado</option>
-          </select>{" "}
-          <p>a</p>
-          <select>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={jueves}>
-                {item.hora}
-              </option>
-            ))}
-          </select>
-          <label>Viernes: </label>
-          <select   onChange={handleChange}>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={viernes}>
-                {item.hora}
-              </option>
-            ))}
-            <option value="5">Cerrado</option>
-          </select>{" "}
-          <p>a</p>
-          <select>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={viernes}>
-                {item.hora}
-              </option>
-            ))}
-          </select>
-          <label>Sabado: </label>
-          <select  onChange={handleChange}>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={sabado}>
-                {item.hora}
-              </option>
-            ))}
-            <option value="6">Cerrado</option>
-          </select>{" "}
-          <p>a</p>
-          <select>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={sabado}>
-                {item.hora}
-              </option>
-            ))}
-          </select>
-          <label>Domingo: </label>
-          <select  onChange={handleChange}>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={domingo}>
-                {item.hora}
-              </option>
-            ))}
-            <option value="7">Cerrado</option>
-          </select>{" "}
-          <p>a</p>
-          <select>
-            {Horas.map((item) => (
-              <option value={item.id} disabled={domingo}>
-                {item.hora}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="acept-button">
-          <button onClick={() => setHorarioModal(false)}>Acceptar</button>
-        </div>
+        <form className="poder" onSubmit={handlesubmit}>
+          <div className="horario">
+            <label>Lunes: </label>
+            <select onChange={handleChange} ref={horaLunes}>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={lunes}>
+                  {item.hora}
+                </option>
+              ))}
+              <option value="cerrado">Cerrado</option>
+            </select>{" "}
+            <p>a</p>
+            <select ref={horaLunes2}>
+            <option value="cerrado">Cerrado</option>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={lunes}>
+                  {item.hora}
+                </option>
+              ))}
+            </select>
+            <label>Martes: </label>
+            <select onChange={handleChange} ref={horaMartes}>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={martes}>
+                  {item.hora}
+                </option>
+              ))}
+              <option value="cerrado">Cerrado</option>
+            </select>{" "}
+            <p>a</p>
+            <select ref={horaMartes2}>
+            <option value="cerrado">Cerrado</option>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={martes}>
+                  {item.hora}
+                </option>
+              ))}
+            </select>
+            <label>Miercoles: </label>
+            <select onChange={handleChange} ref={horaMiercoles}>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={miercoles}>
+                  {item.hora}
+                </option>
+              ))}
+              <option value="cerrado">Cerrado</option>
+            </select>{" "}
+            <p>a</p>
+            <select ref={horaMiercoles2}>
+            <option value="cerrado">Cerrado</option>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={miercoles}>
+                  {item.hora}
+                </option>
+              ))}
+            </select>
+            <label>Jueves: </label>
+            <select onChange={handleChange} ref={horaJueves}>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={jueves}>
+                  {item.hora}
+                </option>
+              ))}
+              <option value="cerrado">Cerrado</option>
+            </select>{" "}
+            <p>a</p>
+            <select ref={horaJueves2}>
+            <option value="cerrado">Cerrado</option>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={jueves}>
+                  {item.hora}
+                </option>
+              ))}
+            </select>
+            <label>Viernes: </label>
+            <select onChange={handleChange} ref={horaViernes}>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={viernes}>
+                  {item.hora}
+                </option>
+              ))}
+              <option value="cerrado">Cerrado</option>
+            </select>{" "}
+            <p>a</p>
+            <select ref={horaViernes2}>
+            <option value="cerrado">Cerrado</option>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={viernes}>
+                  {item.hora}
+                </option>
+              ))}
+            </select>
+            <label>Sabado: </label>
+            <select onChange={handleChange} ref={horaSabado}>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={sabado}>
+                  {item.hora}
+                </option>
+              ))}
+              <option value="cerrado">Cerrado</option>
+            </select>{" "}
+            <p>a</p>
+            <select ref={horaSabado2}>
+            <option value="cerrado">Cerrado</option>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={sabado}>
+                  {item.hora}
+                </option>
+              ))}
+            </select>
+            <label>Domingo: </label>
+            <select onChange={handleChange} ref={horaDomingo}>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={domingo}>
+                  {item.hora}
+                </option>
+              ))}
+              <option value="cerrado">Cerrado</option>
+            </select>{" "}
+            <p>a</p>
+            <select ref={horaDomingo2}>
+            <option value="cerrado">Cerrado</option>
+              {Horas.map((item) => (
+                <option value={item.id} disabled={domingo}>
+                  {item.hora}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="acept-button">
+            <button>Acceptar</button>
+          </div>
+        </form>
       </Modal>
     </>
   );

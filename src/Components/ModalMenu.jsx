@@ -5,10 +5,7 @@ import MenuTable from "./MenuTable";
 import FormTableMenu from "./FormTableMenu";
 import Modal from "../Conteiners/Modal";
 
-function ModalMenu({ menuModal, setMenuModal }) {
-  const data = [];
-
-  const [menu, setMenu] = useState(data);
+function ModalMenu({ menuModal, setMenuModal, menu, setMenu}) {
   console.log(menu);
 
   const addMenu = (menus) => {

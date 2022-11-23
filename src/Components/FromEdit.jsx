@@ -8,7 +8,7 @@ import Contexto from "../Contextos/ContextoCeo";
 const imageType = /image\/(png|jpg|jpeg|svg)/i;
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
-function FromEdit({setHorarioModal, setMenuModal, setEstabModal}) {
+function FromEdit({setHorarioModal, setMenuModal, setEstabModal, }) {
   const profile1 = useRef(null)
 
   const banner1 = useRef(null)
@@ -203,7 +203,7 @@ function FromEdit({setHorarioModal, setMenuModal, setEstabModal}) {
     console.error("Error:", error);
   });
 
-  fetch(`http://localhost:8080/image/ceo/1/restaurant/${restaurant}/logo`, {
+/*   fetch(`http://localhost:8080/image/ceo/1/restaurant/${restaurant}/logo`, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -235,7 +235,7 @@ function FromEdit({setHorarioModal, setMenuModal, setEstabModal}) {
   .then((data) => setRestaurant(data.data.id))
   .catch((error) => {
     console.error("Error:", error);
-  });
+  }); */
 
 }
 

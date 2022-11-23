@@ -19,6 +19,7 @@ header{
     margin-left: 40%;
     height: 100%;
     object-fit: scale-down;
+    cursor: pointer;
 }
 
 .conteiner-Search{

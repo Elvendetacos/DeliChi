@@ -13,6 +13,8 @@ function Home() {
     const [Restaurant, setRestaurant] = useState(false)
     const [register, setRegister] = useState(false)
     const [login, setLogin] = useState(false)
+    const [search, setSearch] = useState(true)
+    const [text, setText] = useState(true)
 
     return ( 
         <>
@@ -28,7 +30,7 @@ function Home() {
             Restaurant && 
                 <ModalRestaurants setRestaurant={setRestaurant}/>
         }
-        <Header></Header>
+        <Header search={search} text={text}/>
         <Nav setRegister={setRegister} setLogin={setLogin}/>
         <Layout>
             <FromHome setRestaurant={setRestaurant}/>

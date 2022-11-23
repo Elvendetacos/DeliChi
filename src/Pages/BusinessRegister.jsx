@@ -10,6 +10,8 @@ import { useContext } from 'react'
 function BusinessRegister() {
   const [showLogin, setShowLogin] = useState(false);
   const { id, setId } = useContext(Contexto);
+  const [search, setSearch] = useState(false)
+  const [text, setText] = useState(false)
 
   return (
     <>
@@ -21,7 +23,7 @@ function BusinessRegister() {
           cambiarid={setId}
         />
       )}
-      <Header></Header>
+      <Header search={search} text={text}/>
       <Layout>
         <ForRegisterB estado={showLogin} cambiarEstado={setShowLogin} />
       </Layout>
