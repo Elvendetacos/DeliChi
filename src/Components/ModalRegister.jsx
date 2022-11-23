@@ -1,8 +1,10 @@
 import "../assets/Styles/ModalRegister.css";
 import Cancel from "../assets/Img/cancel.svg";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ModalRegister({setRegister}) {
+  a = useNavigate()
   const slider = useRef(null);
   const form = useRef(null)
   const handleSubmit = (event) => {
@@ -30,6 +32,7 @@ function ModalRegister({setRegister}) {
       .catch((error) => {
         console.error('Error:', error);
       });
+      setRegister(false)
   }
 
   const siguiente = () => {
