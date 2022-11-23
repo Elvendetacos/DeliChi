@@ -11,6 +11,7 @@ const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
 function FromEdit({setHorarioModal, setMenuModal, setEstabModal, menu, hora, numberTable, capacityTable }) {
 
+  const a = useNavigate()
   const profile1 = useRef(null)
 
   const MenuF = JSON.stringify(menu)
@@ -238,6 +239,8 @@ function FromEdit({setHorarioModal, setMenuModal, setEstabModal, menu, hora, num
   .catch((error) => {
     console.error("Error:", error);
   }); */
+
+  a('/List')
 }
 
   return (
