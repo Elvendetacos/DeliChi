@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ModalRegister({setRegister}) {
-  a = useNavigate()
   const slider = useRef(null);
   const form = useRef(null)
   const handleSubmit = (event) => {
