@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Modal from "../Conteiners/Modal";
 import { useRef } from "react";
 
-function ModalHorario({ setHorarioModal }) {
+function ModalHorario({ setHorarioModal, hora, setHora }) {
   const [lunes, setLunes] = useState(false);
   const [martes, setMartes] = useState(false);
   const [miercoles, setMiercoles] = useState(false);
@@ -11,46 +11,81 @@ function ModalHorario({ setHorarioModal }) {
   const [viernes, setViernes] = useState(false);
   const [sabado, setSabado] = useState(false);
   const [domingo, setdomingo] = useState(false);
-  const [hora, setHora] = useState({});
 
-
-  const cadenaxd = () =>{
+  const cadenaxd = () => {
     let array = new Array();
-    array = [horaLunes, horaMartes, horaMiercoles, horaJueves, horaViernes, horaSabado, horaDomingo]
+    array = [
+      horaLunes,
+      horaMartes,
+      horaMiercoles,
+      horaJueves,
+      horaViernes,
+      horaSabado,
+      horaDomingo,
+    ];
     let array2 = new Array();
-    array2 = [horaLunes2, horaMartes2, horaMiercoles2, horaJueves2, horaViernes2, horaSabado2, horaDomingo2]
-    for(let i=0; i<array.length; i++){
-      if(array[i].current.value === "cerrado" || array2[i].current.value === "cerrado"){
-        array2[i].current.value="cerrado"
-        array[i].current.value="cerrado"
-      }else{
-        console.log("na' de na'")
+    array2 = [
+      horaLunes2,
+      horaMartes2,
+      horaMiercoles2,
+      horaJueves2,
+      horaViernes2,
+      horaSabado2,
+      horaDomingo2,
+    ];
+    for (let i = 0; i < array.length; i++) {
+      if (
+        array[i].current.value === "cerrado" ||
+        array2[i].current.value === "cerrado"
+      ) {
+        array2[i].current.value = "cerrado";
+        array[i].current.value = "cerrado";
+      } else {
+        console.log("na' de na'");
       }
     }
-    console.log(horaLunes.current.value)
-    console.log(horaLunes2.current.value)
+    console.log(horaLunes.current.value);
+    console.log(horaLunes2.current.value);
   };
 
   const handlesubmit = (e) => {
-    cadenaxd()
+    cadenaxd();
     e.preventDefault();
-    setHora(
-      {
-        horario: horaLunes.current.value + "-" + horaLunes2.current.value + "," +
-         horaMartes.current.value + "-" + horaMartes2.current.value + "," +
-         horaMiercoles.current.value + "-" + horaMiercoles2.current.value + "," +
-         horaJueves.current.value + "-" + horaJueves2.current.value + "," +
-         horaViernes.current.value + "-" + horaViernes2.current.value + "," +
-         horaSabado.current.value + "-" + horaSabado2.current.value + "," +
-         horaDomingo.current.value + "-" + horaDomingo2.current.value
-
-      }
-    );
-    console.log(hora)
+    const Horarios = {
+      horario:
+        horaLunes.current.value +
+        "-" +
+        horaLunes2.current.value +
+        "," +
+        horaMartes.current.value +
+        "-" +
+        horaMartes2.current.value +
+        "," +
+        horaMiercoles.current.value +
+        "-" +
+        horaMiercoles2.current.value +
+        "," +
+        horaJueves.current.value +
+        "-" +
+        horaJueves2.current.value +
+        "," +
+        horaViernes.current.value +
+        "-" +
+        horaViernes2.current.value +
+        "," +
+        horaSabado.current.value +
+        "-" +
+        horaSabado2.current.value +
+        "," +
+        horaDomingo.current.value +
+        "-" +
+        horaDomingo2.current.value,
+    };
+    setHora(JSON.stringify(Horarios.horario))
+    setHorarioModal(false)
   };
 
-  useEffect(()=>{
-  },[])
+  useEffect(() => {}, []);
 
   const horaLunes = useRef();
   const horaLunes2 = useRef();
@@ -135,7 +170,7 @@ function ModalHorario({ setHorarioModal }) {
     {
       hora: "23:00",
       id: "23:00",
-    }
+    },
   ];
 
   return (
@@ -154,12 +189,12 @@ function ModalHorario({ setHorarioModal }) {
             </select>{" "}
             <p>a</p>
             <select ref={horaLunes2}>
-            <option value="cerrado">Cerrado</option>
               {Horas.map((item) => (
                 <option value={item.id} disabled={lunes}>
                   {item.hora}
                 </option>
               ))}
+              <option value="cerrado">Cerrado</option>
             </select>
             <label>Martes: </label>
             <select onChange={handleChange} ref={horaMartes}>
@@ -172,12 +207,12 @@ function ModalHorario({ setHorarioModal }) {
             </select>{" "}
             <p>a</p>
             <select ref={horaMartes2}>
-            <option value="cerrado">Cerrado</option>
               {Horas.map((item) => (
                 <option value={item.id} disabled={martes}>
                   {item.hora}
                 </option>
               ))}
+              <option value="cerrado">Cerrado</option>
             </select>
             <label>Miercoles: </label>
             <select onChange={handleChange} ref={horaMiercoles}>
@@ -190,12 +225,12 @@ function ModalHorario({ setHorarioModal }) {
             </select>{" "}
             <p>a</p>
             <select ref={horaMiercoles2}>
-            <option value="cerrado">Cerrado</option>
               {Horas.map((item) => (
                 <option value={item.id} disabled={miercoles}>
                   {item.hora}
                 </option>
               ))}
+              <option value="cerrado">Cerrado</option>
             </select>
             <label>Jueves: </label>
             <select onChange={handleChange} ref={horaJueves}>
@@ -208,12 +243,12 @@ function ModalHorario({ setHorarioModal }) {
             </select>{" "}
             <p>a</p>
             <select ref={horaJueves2}>
-            <option value="cerrado">Cerrado</option>
               {Horas.map((item) => (
                 <option value={item.id} disabled={jueves}>
                   {item.hora}
                 </option>
               ))}
+              <option value="cerrado">Cerrado</option>
             </select>
             <label>Viernes: </label>
             <select onChange={handleChange} ref={horaViernes}>
@@ -226,12 +261,12 @@ function ModalHorario({ setHorarioModal }) {
             </select>{" "}
             <p>a</p>
             <select ref={horaViernes2}>
-            <option value="cerrado">Cerrado</option>
               {Horas.map((item) => (
                 <option value={item.id} disabled={viernes}>
                   {item.hora}
                 </option>
               ))}
+              <option value="cerrado">Cerrado</option>
             </select>
             <label>Sabado: </label>
             <select onChange={handleChange} ref={horaSabado}>
@@ -244,12 +279,12 @@ function ModalHorario({ setHorarioModal }) {
             </select>{" "}
             <p>a</p>
             <select ref={horaSabado2}>
-            <option value="cerrado">Cerrado</option>
               {Horas.map((item) => (
                 <option value={item.id} disabled={sabado}>
                   {item.hora}
                 </option>
               ))}
+              <option value="cerrado">Cerrado</option>
             </select>
             <label>Domingo: </label>
             <select onChange={handleChange} ref={horaDomingo}>
@@ -262,12 +297,12 @@ function ModalHorario({ setHorarioModal }) {
             </select>{" "}
             <p>a</p>
             <select ref={horaDomingo2}>
-            <option value="cerrado">Cerrado</option>
               {Horas.map((item) => (
                 <option value={item.id} disabled={domingo}>
                   {item.hora}
                 </option>
               ))}
+              <option value="cerrado">Cerrado</option>
             </select>
           </div>
           <div className="acept-button">

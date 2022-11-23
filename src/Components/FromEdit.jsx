@@ -3,13 +3,19 @@ import { useEffect, useRef, useState, useContext} from "react";
 import AddImage from "../assets/Img/add-image.png";
 import CardImage from "../Cards/CardImage";
 import Contexto from "../Contextos/ContextoCeo";
+import { useNavigate } from "react-router-dom";
 
 
 const imageType = /image\/(png|jpg|jpeg|svg)/i;
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
-function FromEdit({setHorarioModal, setMenuModal, setEstabModal, }) {
+function FromEdit({setHorarioModal, setMenuModal, setEstabModal, menu, hora, numberTable, capacityTable }) {
+
+  const navigate = useNavigate()
+
   const profile1 = useRef(null)
+
+  const MenuF = JSON.stringify(menu)
 
   const banner1 = useRef(null)
 
@@ -25,7 +31,7 @@ function FromEdit({setHorarioModal, setMenuModal, setEstabModal, }) {
   const form = useRef(null);
   const tipoComida = useRef(null)
   const tipoZona = useRef(null) 
-
+  
   const changeHandler = (e) => {
     const file = e.target.files[0];
     if (!file.type.match(imageType)) {
@@ -170,13 +176,11 @@ function FromEdit({setHorarioModal, setMenuModal, setEstabModal, }) {
   };
 
   const handleSubmit = (event) => {  
-    const banner2 = banner1.files[0]
-    const profile2 = profile1.files[0]
     event.preventDefault();
 
     const formData = new FormData(form.current);
 
-  fetch(`http://localhost:8080/restaurant/ceo/1/zone/${tipoZona.current.value}`, {
+  fetch(`http://localhost:8080/restaurant/ceo/${id}/zone/${tipoZona.current.value}`, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -189,16 +193,16 @@ function FromEdit({setHorarioModal, setMenuModal, setEstabModal, }) {
       name:formData.get("name"),
       phoneNumber:formData.get("phone"),
       address:formData.get("direction"),
-      schedule:"07:00-00:00,08:00-21:00,09:00-22:00,close,10:00-21:00,11:00-21:00,close",
+      schedule:hora,
       kitchen: tipoComida.current.value,
       description:formData.get("description"),
-      menu:"food",
-      tableNumber:5,
-      tableCapacity:5
+      menu:MenuF,
+      tableNumber:numberTable,
+      tableCapacity:capacityTable
       }),
   })
   .then((response) => response.json())
-  .then((data) => setRestaurant(data.data.id))
+  .then((respuest) => console.log(respuest.data.id))
   .catch((error) => {
     console.error("Error:", error);
   });
@@ -236,7 +240,6 @@ function FromEdit({setHorarioModal, setMenuModal, setEstabModal, }) {
   .catch((error) => {
     console.error("Error:", error);
   }); */
-
 }
 
   return (
@@ -370,7 +373,7 @@ function FromEdit({setHorarioModal, setMenuModal, setEstabModal, }) {
             </div>
           </div>
           <div className="conteiner-options">
-            <button type="button">Regresar</button>
+            <button type="button" onClick={mover()}>Regresar</button>
             <button type="button">Editar</button>
             <button type="submit">Guardar Datos</button>
           </div>

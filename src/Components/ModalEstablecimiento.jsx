@@ -1,23 +1,42 @@
 import Modal from "../Conteiners/Modal";
 import "../assets/Styles/ModalEstablecimiento.css";
-import { useState } from "react"
-function ModalEstablecimiento({setEstabModal}) {
+import { useState, useRef } from "react";
 
-  const [numberTable, setNumberTable] = useState(null);
-  const [capacityTable, setCapacityTable] = useState(null);
+function ModalEstablecimiento({
+  setEstabModal,
+  setCapacityTable,
+  setNumberTable,
+}) {
+
+  const Table = useRef(null);
+  const People = useRef(null);
+
+  const handleSubmit = (event) =>{
+    event.preventDefault();
+    setNumberTable(Table.current.value);
+    setCapacityTable(People.current.value);
+    salir()
+  }
+
+  const salir = () =>{
+    setEstabModal(false)
+  }
+
   return (
     <Modal>
-      <div className="establecimiento-modal">
-        <div className="input-establecimiento">
-          <p>Numero de mesas: </p>
-          <input type="number" name="numberTable" id="" />
-          <p>Numero de personas: </p>
-          <input type="number" name="capacityTable" id="" />
+      <form className="formEstablecimiento" onSubmit={handleSubmit}>
+        <div className="establecimiento-modal">
+          <div className="input-establecimiento">
+            <p>Numero de mesas: </p>
+            <input type="number" id="" ref={Table} />
+            <p>Numero de personas: </p>
+            <input type="number" id="" ref={People} />
+          </div>
         </div>
-      </div>
-      <div className="options-establecimiento">
-        <button onClick={()=>setEstabModal(false)}>Aceptar</button>
-      </div>
+        <div className="options-establecimiento">
+          <button>Aceptar</button>
+        </div>
+      </form>
     </Modal>
   );
 }

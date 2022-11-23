@@ -38,7 +38,7 @@ function FromListRegister() {
   };
 
   const mover = () => {
-    navigate("/Resturant");
+    navigate("/Restaurant");
   };
 
   useEffect(() => {
@@ -57,9 +57,9 @@ function FromListRegister() {
                   <p>{item.zone}</p>
                 </div>
               ))}
-            <div className="add-restaurant">
+            <div className="add-restaurant" onClick={mover}>
               <img src={Add} alt="" />
-              <p onClick={mover}>Agregar un restaurante</p>
+              <p>Agregar un restaurante</p>
             </div>
           </div>
         </div>
