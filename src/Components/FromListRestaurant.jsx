@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Contexto from "../Contextos/ContextoCeo";
 import Rafa from "../assets/Img/rafa.jpg";
 
-function FromListRegister() {
+function FromListRegister({setEditar, setIdRestaurant}) {
   const [state, setState] = useState([]);
 
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ function FromListRegister() {
   const { id } = useContext(Contexto);
 
   const RestaurantList = () => {
-    fetch(`http://localhost:8080/ceo/${id}/restaurants`, {
+    fetch(`http://localhost:8080/ceo/1/restaurants`, {
       method: "GET",
       headers: {
         Accept: "aplication/json",
@@ -37,7 +37,15 @@ function FromListRegister() {
       });
   };
 
-  const mover = () => {
+
+
+  const newRestaurant = () => {
+
+    navigate("/Restaurant");
+  };
+
+  const editRestaurant = (idRestaurant) => {
+    setIdRestaurant(idRestaurant)
     navigate("/Restaurant");
   };
 
@@ -51,13 +59,13 @@ function FromListRegister() {
         <div className="list-restaurants">
           <div className="cards-restaurants">
           {state.map((item) => (
-                <div className="cardR">
+                <div className="cardR" onClick={()=>editRestaurant(item.id)}>
                   <img src={Rafa} alt="" />
                   <p>{item.name}</p>
                   <p>{item.zone}</p>
                 </div>
               ))}
-            <div className="add-restaurant" onClick={mover}>
+            <div className="add-restaurant" onClick={newRestaurant}>
               <img src={Add} alt="" />
               <p>Agregar un restaurante</p>
             </div>

@@ -78,9 +78,6 @@ function FromHome({ setRestaurant , setId}) {
     },
   ];
 
-  const Zone = {
-    zone: "Tuxtla Gutierrez",
-  };
 
   const Locality = [
     {
@@ -96,46 +93,7 @@ function FromHome({ setRestaurant , setId}) {
       IMG: Suchiapa,
     },
   ];
-
-  const Restaurant = [
-    {
-      Name: "Gorditas",
-      Img: Rafa,
-    },
-    {
-      Name: "Alan",
-      Img: Rafa,
-    },
-    {
-      Name: "Comotas",
-      Img: Rafa,
-    },
-  ];
-/* 
-  useEffect(() => {
-    fetch(`http://localhost:8080/zone/1/restaurants`, {
-      method: "GET",
-      headers: {
-        Accept: "aplication/json",
-        "Content-Type": "Aplication/json",
-      },
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((respuesta) => setState(respuesta.data))
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
- */
+ 
   return (
     <>
       <div className="slides-section">

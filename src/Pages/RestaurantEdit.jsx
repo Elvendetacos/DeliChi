@@ -5,6 +5,7 @@ import ModalMenu from "../Components/ModalMenu";
 import { useState } from "react";
 import ModalHorario from "../Components/ModalHorario";
 import ModalEstablecimiento from "../Components/ModalEstablecimiento";
+import { useEffect } from "react";
 
 function RestauranrEdit() {
   const [menuModal, setMenuModal] = useState(false);
@@ -17,20 +18,28 @@ function RestauranrEdit() {
   const [numberTable, setNumberTable] = useState(null);
   const [capacityTable, setCapacityTable] = useState(null);
 
+  const [horaioG, setHorarioG] = useState();
+  const [menuEdit, setMenuEdit] = useState();
+  const [mesa, setMesa] = useState();
+  const [person, setPerson] = useState();
 
   return (
     <>
-      {estabModal && <ModalEstablecimiento setEstabModal={setEstabModal} setNumberTable={setNumberTable} setCapacityTable={setCapacityTable}/>}
-      {horarioModal && <ModalHorario setHorarioModal={setHorarioModal} setHora={setHora} hora={hora}/>}
+      {estabModal && <ModalEstablecimiento numberTable={numberTable} capacityTable={capacityTable}  setMesa={setMesa} setPerson={setPerson} mesa={mesa} person={person} setEstabModal={setEstabModal} setNumberTable={setNumberTable} setCapacityTable={setCapacityTable}/>}
+      {horarioModal && <ModalHorario horaioG={horaioG} setHorarioModal={setHorarioModal} setHora={setHora} hora={hora}/>}
       {menuModal && (
-        <ModalMenu menuModal={menuModal} setMenuModal={setMenuModal} menu={menu} setMenu={setMenu}/>
+        <ModalMenu setMenuEdit={setMenuEdit} menuEdit={menuEdit} menuModal={menuModal} setMenuModal={setMenuModal} menu={menu} setMenu={setMenu}/>
       )}
       <Header search={search} text={text} />
       <Layout>
         <FromEdit
+          setHorarioG={setHorarioG}
           setHorarioModal={setHorarioModal}
           setMenuModal={setMenuModal}
           setEstabModal={setEstabModal}
+          setMenuEdit={setMenuEdit}
+          setMesa={setMesa}
+          setPerson={setPerson}
           menu={menu}
           hora={hora}
           numberTable={numberTable}

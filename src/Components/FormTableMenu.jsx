@@ -35,6 +35,7 @@ function FormTableMenu({addMenu}) {
         className="data-precio"
           type="number"
           name="precio"
+          min="1"
           id=""
           {...register("precio", {
             required: { value: true, message: "Campo Requerido" },

@@ -2,8 +2,10 @@ import "../assets/Styles/ModalHorario.css";
 import { useEffect, useState } from "react";
 import Modal from "../Conteiners/Modal";
 import { useRef } from "react";
+import { validate } from "uuid";
 
-function ModalHorario({ setHorarioModal, hora, setHora }) {
+
+function ModalHorario({horaioG, setHorarioModal, hora, setHora }) {
   const [lunes, setLunes] = useState(false);
   const [martes, setMartes] = useState(false);
   const [miercoles, setMiercoles] = useState(false);
@@ -11,6 +13,34 @@ function ModalHorario({ setHorarioModal, hora, setHora }) {
   const [viernes, setViernes] = useState(false);
   const [sabado, setSabado] = useState(false);
   const [domingo, setdomingo] = useState(false);
+
+
+  const validation = () => {
+    let array = new Array()
+    array = [
+      horaLunes,
+      horaLunes2,
+      horaMartes,
+      horaMartes2,
+      horaMiercoles,
+      horaMiercoles2,
+      horaJueves,
+      horaJueves2,
+      horaViernes,
+      horaViernes2,
+      horaSabado,
+      horaSabado2,
+      horaDomingo,
+      horaDomingo2,
+    ]
+    console.log(horaioG)
+    if(horaioG != undefined){
+      let result = horaioG.split(/-|,/)
+      for(let i=0; i<array.length; i++){
+        array[i].current.value = result[i]
+      }
+    }
+  }
 
   const cadenaxd = () => {
     let array = new Array();
@@ -52,7 +82,7 @@ function ModalHorario({ setHorarioModal, hora, setHora }) {
     cadenaxd();
     e.preventDefault();
 
-    const Liz =         
+    const lista =         
     horaLunes.current.value +
     "-" +
     horaLunes2.current.value +
@@ -81,11 +111,14 @@ function ModalHorario({ setHorarioModal, hora, setHora }) {
     "-" +
     horaDomingo2.current.value;
     
-    setHora(Liz)
+    setHora(lista)
     setHorarioModal(false)
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    validation();
+  }, []);
+
 
   const horaLunes = useRef();
   const horaLunes2 = useRef();
