@@ -1,0 +1,45 @@
+h1{
+    text-align: center;
+}
+
+.table{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table td, .table th{
+
+  padding: 8px;
+}
+.table tr:nth-child(even){
+    color:#252525;
+}
+.table tr:hover {
+    background-color: #252525;
+    color:#2ACD53;
+  
+}
+
+.table th{
+ padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #2ACD53;
+  color: #252525;
+}
+.reservacion{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.rc{
+  width: 90%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  border: 5px solid #e9e9e9;
+
+}

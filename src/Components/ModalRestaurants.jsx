@@ -2,6 +2,7 @@ import '../assets/Styles/ModalRestaurants.css'
 import Rafa from '../assets/Img/banner-placeholder.jpg'
 import Cancel from '../assets/Img/cancel.svg'
 import AddReservation from './AddReservation';
+import Star from '../assets/Img/Star.svg'
 import { useEffect, useState } from 'react';
 
 function ModalRestaurants({setRestaurant, id, idUser}) {
@@ -46,7 +47,18 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
     }
 
     const [modal, setModal] = useState(false)
-
+    
+       /*
+       funcion de las estrellas
+    const [star, setStar] = usesStare(null)
+    const mostStar = 5;
+    const starPercentage = (star / mostStar) * 100;
+    const starDecimal = Math.round(starPercentage);
+    const starStyles = () =>{
+        return{
+            with: starDecimal + "%"
+        };
+    };*/
     return ( 
         <>
         { 
@@ -108,6 +120,23 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                 </div>
                 <div className='Reservations-button'>
                     <button onClick={()=>login()}>Añadir Reservación</button>
+                </div>
+                <div className="reservacionC">
+                    <p><b>Reservación:</b></p>
+                    <br></br>
+                    <p>Cantidad de personas:</p>
+                    <p>{}</p>
+                    <p>Fecha:</p>
+                    <p>{}</p>
+                    <p>Hora:</p>
+                    <p>{}</p>
+                    <button>Cancelar</button>
+                    <button>Editar</button>
+                </div>
+                <div className="resena">
+                    <p><b>Reseña</b></p>
+                      <img src={Star} className="color"/>
+                    <p>aca va las estrellas</p>
                 </div>
             </div>
         </div>
