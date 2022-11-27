@@ -6,7 +6,7 @@ import Contexto from "../Contextos/ContextoCeo";
 import { useNavigate } from "react-router-dom";
 import ContextoRestaurant from "../Contextos/ContextoRestaurant";
 import axios from "axios";
-
+import ModalEdit from "./ModalEdit"
 const imageType = /image\/(png|jpg|jpeg|svg)/i;
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 
@@ -306,8 +306,10 @@ const loadAloj = (mesa, person) =>{
   setEstabModal(true)
 }
 
+const [openModal,setOpenModal] = useState (false)
   return (
     <>
+   
       <form onSubmit={handleSubmit} ref={form}>
         <div className="conteiner-edit">
           <div className="conteiner-edit-1">
@@ -444,9 +446,18 @@ const loadAloj = (mesa, person) =>{
             <button type="button" onClick={()=>regresar()}>Regresar</button>
             <button type="reset">Editar</button>
             <button type="submit">Guardar Datos</button>
+            
+            <div>
+            <button onClick={() => setOpenModal(true)}>Reservaciones</button>
+            <ModalEdit open={openModal } onClose ={() => setOpenModal(false)}/>
+            </div>
+            
           </div>
+          
         </div>
+        
       </form>
+      
     </>
   );
 }
