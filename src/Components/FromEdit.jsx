@@ -448,7 +448,7 @@ const [openModal,setOpenModal] = useState (false)
             <button type="submit">Guardar Datos</button>
             
             <div>
-            <button onClick={() => setOpenModal(true)}>Reservaciones</button>
+            <button type="button"onClick={() => setOpenModal(true)}>Reservaciones</button>
             <ModalEdit open={openModal } onClose ={() => setOpenModal(false)}/>
             </div>
             

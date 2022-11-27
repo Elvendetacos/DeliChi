@@ -135,7 +135,11 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                 </div>
                 <div className="resena">
                     <p><b>Reseña</b></p>
-                      <img src={Star} className="color"/>
+                      <img src={Star} alt="/" />
+                      <img src={Star} alt="/"/>
+                      <img src={Star} alt="/"/>
+                      <img src={Star} alt="/"/>
+                      <img src={Star} alt="/"/>
                     <p>aca va las estrellas</p>
                 </div>
             </div>
