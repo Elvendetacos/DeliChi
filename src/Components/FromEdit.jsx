@@ -34,7 +34,7 @@ function FromEdit({setMesa, setPerson, setHorarioG, setMenuEdit, setHorarioModal
   const form = useRef(null);
   const tipoComida = useRef(null)
   const tipoZona = useRef(null) 
-  
+  const [reservacion, setReservacion] = useState([])
 
   const handleChange = (event) => {
     if(event.target.name === "zona"){
@@ -65,6 +65,7 @@ function FromEdit({setMesa, setPerson, setHorarioG, setMenuEdit, setHorarioModal
       .then((respuesta => {
         console.log(respuesta.data);
         setRestaurantData(respuesta.data),
+        setReservacion(respuesta.data.reservations),
         setZoneEdit(respuesta.data.zone.id)}))
       .catch((error) => {
           console.error('Error:', error);
@@ -449,7 +450,7 @@ const [openModal,setOpenModal] = useState (false)
             
             <div>
             <button type="button"onClick={() => setOpenModal(true)}>Reservaciones</button>
-            <ModalEdit open={openModal } onClose ={() => setOpenModal(false)}/>
+            <ModalEdit reservacion={reservacion} open={openModal } onClose ={() => setOpenModal(false)}/>
             </div>
             
           </div>

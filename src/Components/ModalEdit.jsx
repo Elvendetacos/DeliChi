@@ -13,8 +13,8 @@ const url =  'http://localhost:8080/reservation/'
 const  ReservationCeo = () => {
 const {reservation} = useContext(ContextoR);}
 
-const Modal = ({open,onClose}) => {
-
+const Modal = ({open,onClose, reservacion}) => {
+    
     if(!open)return null;
 
 return(
@@ -38,9 +38,17 @@ return(
                </tr>
             </thead>
             <tbody className="table-group-dividier">
-             <tr>
-              
-             </tr>
+             
+                {reservacion.map((item)=>(
+                    <tr>
+                        <th>{item.user.name}</th>
+                        <th>{item.user.lastName}</th>
+                        <th>{item.hour}</th>
+                        <th>{item.date}</th>
+                        <th>{item.people}</th>
+                    </tr>
+                ))}
+             
             
             </tbody>
         </table>
