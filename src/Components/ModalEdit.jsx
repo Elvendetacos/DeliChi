@@ -48,23 +48,12 @@ return(
                         <th>{item.hour}</th>
                         <th>{item.date}</th>
                         <th>{item.people}</th>
-                        <th>
-                            <input type="radio" value={d}/>ho
-                        </th>
                     </tr>
                 ))}
             </tbody>
         </table>
         </div>
         </div>
-      </div>
-      <div className="btnContainer">
-      <button className='btnPrimary'>
-        <span className='bold'>Editar</span>
-      </button>
-      <button className='btnOutline'>
-        <span>Eliminar</span>
-      </button>
       </div>
       </div>
       </div>
