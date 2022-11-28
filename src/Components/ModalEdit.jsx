@@ -4,7 +4,7 @@ import jiji from '../assets/img/xD.jpg'
 
 import { Link } from "react-router-dom";
 import axios from "axios";
-//import React,{useEffect,useState} from "react";
+import {useEffect,useState} from "react";
 import { useContext } from "react";
 //import  ContextoR  from "../Contextos/ContextoR"
 
@@ -16,6 +16,7 @@ const {reservation} = useContext(ContextoR);}
 const Modal = ({open,onClose, reservacion}) => {
     
     if(!open)return null;
+
 
 return(
     <div className="overlay">
@@ -35,6 +36,7 @@ return(
                  <th>Hora:</th>
                  <th>Fecha:</th>
                  <th>Cantidad de Personas:</th>
+                 <th>Seleciona: </th>
                </tr>
             </thead>
             <tbody className="table-group-dividier">
@@ -46,10 +48,11 @@ return(
                         <th>{item.hour}</th>
                         <th>{item.date}</th>
                         <th>{item.people}</th>
+                        <th>
+                            <input type="radio" value={d}/>ho
+                        </th>
                     </tr>
                 ))}
-             
-            
             </tbody>
         </table>
         </div>
@@ -57,10 +60,10 @@ return(
       </div>
       <div className="btnContainer">
       <button className='btnPrimary'>
-        <span className='bold'>perros</span>
+        <span className='bold'>Editar</span>
       </button>
       <button className='btnOutline'>
-        <span>xD</span>
+        <span>Eliminar</span>
       </button>
       </div>
       </div>

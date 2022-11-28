@@ -7,6 +7,7 @@ import Contexto from "../Contextos/ContextoCeo";
 import User from "../Contextos/ContextoUser";
 import ContextoRestaurant from "../Contextos/ContextoRestaurant";
 import Resta from "../Components/ModalRestaurants"
+import Star from "../Components/Star"
 import { useState } from "react";
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
               <Route path="/Restaurant" element={<RestauranrEdit />}></Route>
               <Route path="/List" element={<ListRestaurant />}></Route>
               <Route path="/Register" element={<BusinessRegister />}></Route>
-              <Route path="/Restaurante" element={<Resta/>}></Route> 
+              <Route path="/Restaurante" element={<Resta/>}></Route> 7
+              <Route path="/Star" element={<Star/>}></Route>
               <Route path="/" element={<Home />}></Route>
             </Routes>
           </ContextoRestaurant.Provider>
