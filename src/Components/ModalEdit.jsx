@@ -14,9 +14,7 @@ const  ReservationCeo = () => {
 const {reservation} = useContext(ContextoR);}
 
 const Modal = ({open,onClose, reservacion}) => {
-    
     if(!open)return null;
-
 
 return(
     <div className="overlay">
@@ -31,12 +29,12 @@ return(
             <table className="table">
             <thead>
               <tr>
-                 <th>Nombre:</th>
-                 <th>Apellido:</th>
-                 <th>Hora:</th>
-                 <th>Fecha:</th>
-                 <th>Cantidad de Personas:</th>
-                 <th>Seleciona: </th>
+                 <th>Nombre</th>
+                 <th>Apellido</th>
+                 <th>Hora</th>
+                 <th>Fecha</th>
+                 <th>Cantidad de Personas</th>
+                 <th>Estado </th>
                </tr>
             </thead>
             <tbody className="table-group-dividier">
@@ -48,17 +46,20 @@ return(
                         <th>{item.hour}</th>
                         <th>{item.date}</th>
                         <th>{item.people}</th>
+                        <th>{item.status}</th>
                     </tr>
                 ))}
             </tbody>
         </table>
+        
+        </div>    
         </div>
-        </div>
+        <button onClick={onClose}>aceptar</button>
       </div>
       </div>
       </div>
-  
     </div>
+
 )
 }
 export default Modal

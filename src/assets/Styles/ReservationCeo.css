@@ -2,6 +2,8 @@ h3{
     text-align: center;
 }
 
+
+
 .table{
   border-collapse: collapse;
   width: 100%;
@@ -19,12 +21,21 @@ h3{
   
 }
 
+.table thead{
+  background-color: #2ACD53;
+}
 .table th{
  padding-top: 5px;
-  padding-bottom: 1px;
-  text-align: left;
-  background-color: #2ACD53;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  text-align: center;
   color: #252525;
+  border-bottom: #252525 ;
+}
+
+.table tbody{
+  background-color: #e9e9e9;
+  
 }
 .reservacion{
     width: 100%;
@@ -42,3 +53,6 @@ h3{
   border: 5px solid #e9e9e9;
 
 }
+
+
+

@@ -1,7 +1,7 @@
 import "../assets/Styles/AddReservation.css";
 import { useEffect, useState, useRef } from "react";
 
-function AddReservation({setModal, idUser, idRestaurant}) {
+function AddReservation({setModal, idUser, idRestaurant, reser}) {
     var today = new Date();
     const [state, setState] = useState()
     const [dataValue, setDataValue] = useState()
@@ -13,7 +13,8 @@ function AddReservation({setModal, idUser, idRestaurant}) {
       event.preventDefault();
       const formData = new FormData(form.current);
   
-    fetch(`http://localhost:8080//reservation/user/${idUser}/restaurant/${idRestaurant}`, {
+    if(reser ===undefined){
+      fetch(`http://localhost:8080//reservation/user/${idUser}/restaurant/${idRestaurant}`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -34,6 +35,30 @@ function AddReservation({setModal, idUser, idRestaurant}) {
       console.error("Error:", error);
     });
 
+    }
+    else{
+      fetch(`http://localhost:8080/reservation/${reser.id}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date:dataValue,
+        people:formData.get("people"),
+        hour:hora.current.value
+        }),
+    })
+    .then((response) => response.json())
+    .then((data) => (data))
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
+    }
     setModal(false)
   
   }
@@ -50,6 +75,7 @@ function AddReservation({setModal, idUser, idRestaurant}) {
   };
 
   useEffect(() => {
+    console.log(reser)
     obtenerFecha();
   });
 
@@ -60,7 +86,7 @@ function AddReservation({setModal, idUser, idRestaurant}) {
             <form onSubmit={handleSubmit} ref={form}>
             <div className="reservation">
             <p>Cantidad de personas:</p>
-          <input type="number" name="people" placeholder="Cantidad de personas"/>
+          <input type="number"  name="people" placeholder="Cantidad de personas"/>
           <p>Hora:</p>
           <select ref={hora}>
             <option value="00:00">00:00</option>

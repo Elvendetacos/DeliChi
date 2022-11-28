@@ -8,7 +8,7 @@ import { useState, useContext } from 'react';
 import ModalRegister from '../Components/ModalRegister';
 import ModalLogin from '../Components/ModalLogin';
 import User from '../Contextos/ContextoUser'
-
+import ModalReservacion from '../Components/ModalReservation'
 function Home() {
 
     const [Restaurant, setRestaurant] = useState(false)
@@ -18,10 +18,15 @@ function Home() {
     const [text, setText] = useState(true)
     const [id, setId] = useState()
     const { idUser, setIdUser } = useContext(User);
+    const [reservacion, setReservacion] = useState(false)
 
 
     return ( 
         <>
+        {
+            reservacion && 
+            <ModalReservacion idUser={idUser} onClose ={() => setReservacion(false)} open={setReservacion}/>
+        }
         {
             login && 
                 <ModalLogin setLogin={setLogin} setIdUser={setIdUser}/>
@@ -32,10 +37,11 @@ function Home() {
         }
         {
             Restaurant && 
-                <ModalRestaurants setRestaurant={setRestaurant} id={id} idUser={idUser}/>
+                <ModalRestaurants setReservacion={setReservacion} setRestaurant={setRestaurant} id={id} idUser={idUser}/>
         }
+        
         <Header search={search} text={text}/>
-        <Nav setRegister={setRegister} setLogin={setLogin}/>
+        <Nav setReservacion={setReservacion} setRegister={setRegister} setLogin={setLogin}/>
         <Layout>
             <FromHome setRestaurant={setRestaurant} setId={setId}/>
         </Layout>
