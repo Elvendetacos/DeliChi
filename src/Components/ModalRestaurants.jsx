@@ -11,11 +11,34 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
     const [dato, setDato]= useState(null)
     const [menu, setMenu]=useState([])
     const [Logueado, setLogueado] = useState(false)
+    const [reservacionData, setReservacionData] = useState([])
     let Hora = new Array([]);
 
     const SplitHora = () =>{
         Hora = (dato && dato.schedule.split(","))
         console.log(Hora)
+    }
+
+    const reservacion = () => {
+        fetch(`http://localhost:8080/${idUser}/reservations`, {
+            method: "GET", headers: {
+                Accept: "aplication/json",
+                "Content-Type": "Aplication/json"
+            }, mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+      
+        })
+            .then((response) => {return response.json()})
+            .then((respuesta => {setReservacionData(respuesta.data)}))
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+            console.log(reservacionData);
     }
 
     useEffect(()=>{
@@ -37,6 +60,7 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
             .catch((error) => {
                 console.error('Error:', error);
             });
+            reservacion();
     }, [1])
 
     const login = ()  =>{
