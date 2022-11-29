@@ -19,27 +19,6 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
         console.log(Hora)
     }
 
-    const reservacion = () => {
-        fetch(`http://localhost:8080/${idUser}/reservations`, {
-            method: "GET", headers: {
-                Accept: "aplication/json",
-                "Content-Type": "Aplication/json"
-            }, mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-      
-        })
-            .then((response) => {return response.json()})
-            .then((respuesta => {setReservacionData(respuesta.data)}))
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-            console.log(reservacionData);
-    }
 
     useEffect(()=>{
         fetch(`http://localhost:8080/restaurant/${id}`, {
@@ -60,7 +39,7 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
             .catch((error) => {
                 console.error('Error:', error);
             });
-            reservacion();
+            
     }, [1])
 
     const login = ()  =>{
@@ -75,7 +54,7 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
 
     useEffect(()=>{
         //cmabar el id y el reseña como esta en la base de datos
-        fetch(`http://localhost:8080/reseña/${id}`, {
+        /*fetch(`http://localhost:8080/reseña/${id}`, {
       method: "GET", headers: {
           Accept: "aplication/json",
           "Content-Type": "Aplication/json"
@@ -92,7 +71,7 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
      .then((respuesta => setRating(respuesta.data)))
      .catch((error)=>{
         console.error('Error: ', error);
-     });
+     });*/
       })
     
     const [rating,setRating] = useState(null);
@@ -155,13 +134,13 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                         }
                     </div>
                 </div>
-                <div className='photos-restaurant'>
+                {/*<div className='photos-restaurant'>
                     AQUI VA UN SLIDER XD
-                </div>
+                </div>*/}
                 <div className='Reservations-button'>
                     <button onClick={()=>login()}>Añadir Reservación</button>
                 </div>
-                <div className='reservacionC'>
+                {/*<div className='reservacionC'>
                     <p><b>Reservación:</b></p>
                     <br></br>
                     <p>Cantidad de personas:</p>
@@ -172,7 +151,7 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                     <p>{}</p>
                     <button>Cancelar</button>
                     <button>Editar</button>
-                </div>
+                    </div>*/}
                 <div className='resena'>
                     <p><b>Reseña</b></p>
                     <div>
@@ -186,7 +165,7 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                         <FaStar className='star' color={ratingValue  <= (hover || rating) ? "#FFFF00" : "FFFFF"} 
                         size={30} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={()=> setHover(null)}
                         />
-                    </label>
+                     </label>
                 );
             })}
             

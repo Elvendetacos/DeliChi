@@ -6,15 +6,17 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
     const [state, setState] = useState()
     const [dataValue, setDataValue] = useState()
     const hora = useRef(null)
-
     const form = useRef(null)
-
+    const date = useRef(null)
+    const peopleR = useRef(null)
+    const [hour, setHour] = useState()
+    const [people, setPeople] = useState()
     const handleSubmit = (event) => {
       event.preventDefault();
       const formData = new FormData(form.current);
   
     if(reser ===undefined){
-      fetch(`http://localhost:8080//reservation/user/${idUser}/restaurant/${idRestaurant}`, {
+      fetch(`http://localhost:8080/reservation/user/${idUser}/restaurant/${idRestaurant}`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -64,7 +66,20 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
   }
 
     const handleChange = (event) =>{
-        setDataValue(event.target.value)
+      if (event.target.name=== "hour") {
+        const newHour = event.target.value
+        console.log(newHour)
+        setHour(newHour)
+      }
+      if (event.target.name=== "people") {
+        const newPeople = event.target.value
+        console.log(newPeople)
+        setPeople(newPeople)
+      }
+      if (event.target.name=== "date") {
+        const newDate = event.target.value
+        setDataValue(newDate)
+      }
     }
 
     const obtenerFecha = () => {
@@ -75,10 +90,14 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
   };
 
   useEffect(() => {
-    console.log(reser)
     obtenerFecha();
-  });
-
+    if (reser !=undefined){
+      setDataValue(reser.date)
+      hora.current.value = reser.hour
+      peopleR.current.value = reser.people
+    }
+  },[]);
+  
   return (
     <>
       <div className="font-reservation">
@@ -86,9 +105,9 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
             <form onSubmit={handleSubmit} ref={form}>
             <div className="reservation">
             <p>Cantidad de personas:</p>
-          <input type="number"  name="people" placeholder="Cantidad de personas"/>
+          <input type="number" ref={peopleR} onChange={handleChange} value={people && people} name="people" placeholder="Cantidad de personas"/>
           <p>Hora:</p>
-          <select ref={hora}>
+          <select onChange={handleChange} name="hour" value={hour && hour} ref={hora}>
             <option value="00:00">00:00</option>
             <option value="00:30">00:30</option>
             <option value="01:00">01:00</option>
@@ -139,7 +158,7 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
             <option value="23:30">23:30</option>
           </select>
           <p>Fecha:</p>
-          <input type="date" min={state} max="2025-01-01" onkeydown="return false" onChange={handleChange}/>
+          <input type="date" name="date" value={dataValue && dataValue} min={state} max="2025-01-01" onkeydown="return false" onChange={handleChange}/>
             </div>
             <div className="button-actions">
                 <button type="button" onClick={()=>setModal(false)}>Cancelar</button>

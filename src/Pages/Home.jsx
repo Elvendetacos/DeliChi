@@ -17,7 +17,7 @@ function Home() {
     const [search, setSearch] = useState(true)
     const [text, setText] = useState(true)
     const [id, setId] = useState()
-    const { idUser, setIdUser } = useContext(User);
+    const { idUser, setIdUser } = useContext(User)
     const [reservacion, setReservacion] = useState(false)
 
 

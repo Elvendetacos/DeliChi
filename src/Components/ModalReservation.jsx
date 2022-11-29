@@ -15,7 +15,7 @@ const Modal = ({ open, onClose, idUser }) => {
     });
   };
   useEffect(() => {
-    fetch(`http://localhost:8080/user/reservations/1`, {
+    fetch(`http://localhost:8080/user/reservations/${idUser}`, {
       method: "GET",
       headers: {
         Accept: "aplication/json",
@@ -37,15 +37,12 @@ const Modal = ({ open, onClose, idUser }) => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  },);
 
-  console.log(reservations);
+  const [reser, setReser] = useState({});
 
-  const [reser, setReser] = useState();
-
-  const login = (item)  =>{
+  const edit = (item)  =>{
     setReser(item)
-    console.log(reser)
     setModal(true);
 }
 
@@ -54,7 +51,7 @@ const Modal = ({ open, onClose, idUser }) => {
     <>
         { 
             modal && 
-                <AddReservation setReser={reser} setModal={setModal} idUser={idUser}/>
+                <AddReservation reser={reser} setModal={setModal} idUser={idUser}/>
         }
     <div className="overlay">
       <div className="modalContainer">
@@ -77,7 +74,7 @@ const Modal = ({ open, onClose, idUser }) => {
                   </thead>
                   <tbody className="table-group-dividier">
                     {reservations.map((item) => (
-                      <tr onClick={()=>login(item)}>
+                      <tr onClick={()=>edit(item)}>
                         <th>
                           {item.hour}
                         </th>

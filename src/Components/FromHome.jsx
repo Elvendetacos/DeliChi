@@ -1,6 +1,6 @@
 import "../assets/Styles/Home.css";
 import '../assets/Styles/Star.css'
-import Rafa from "../assets/Img/rafa.jpg";
+import Rafa from "../assets/Img/rafa.jpg"
 import Chiapa from "../assets/Img/Chiapa.jpg";
 import Tuxtla from "../assets/Img/Tuxtla.jpg";
 import Suchiapa from "../assets/Img/suchiapa.jpg";
@@ -11,18 +11,18 @@ import Img3 from "../assets/Img/placeholder3.jpg";
 import Img4 from "../assets/Img/placeholder4.jpg";
 import {FaStar} from 'react-icons/fa'
 import { useEffect, useState, useRef} from "react";
+import { useNavigate } from "react-router-dom";
 
 function FromHome({ setRestaurant , setId}) {
 
+  const navigate = useNavigate();
   const [zone, setZone] = useState([])
   const [zoneName, setZoneName] = useState([])
 
   useEffect(()=>{
     fetch(`http://localhost:8080/zone/3/restaurants/`, {
-      method: "GET", headers: {
-          Accept: "aplication/json",
-          "Content-Type": "Aplication/json"
-      }, mode: 'cors',
+      method: "GET",
+      mode: 'cors',
       cache: 'no-cache',
       credentials: 'same-origin',
       headers: {
@@ -41,10 +41,8 @@ function FromHome({ setRestaurant , setId}) {
 
   const Fetch2 = () =>{
     fetch(`http://localhost:8080/zone/3/`, {
-      method: "GET", headers: {
-          Accept: "aplication/json",
-          "Content-Type": "Aplication/json"
-      }, mode: 'cors',
+      method: "GET",
+      mode: 'cors',
       cache: 'no-cache',
       credentials: 'same-origin',
       headers: {
@@ -97,7 +95,9 @@ function FromHome({ setRestaurant , setId}) {
   ];
 
 
-  //const url='' poner la api
+  const page = () => {
+    navigate("/Restaurants");
+  };
   const [rating,setRating] = useState(false);
   const [hover, setHover] = useState(false);
  
@@ -117,13 +117,16 @@ function FromHome({ setRestaurant , setId}) {
       <div className="restaurants-section">
         <div className="restaurants-in">
           <p>Restaurantes en {zoneName.name}:</p>
+          
         </div>
+        <button onClick={page}>ver mas</button>
         <div className="conteiner-view-restaurants">
           {zone.map((restaurante) => (
             <div
               className="card-restaurant"
               onClick={()=>Resta(restaurante.id)}
             >
+              
               <div className="img-restaurant">
                 <img src={Rafa} alt="" />
               </div>
@@ -132,11 +135,11 @@ function FromHome({ setRestaurant , setId}) {
               </div>
               {/* Aqui es para las estrellas previzualizadas del restaurante */}
               <div className="ranked-restaurant"></div>
-              <div className='resena'>
+              {/* <div className='resena'>
                     <p><b>Reseña</b></p>
                     <div>
                     {[...Array(5)].map((star, i)=>{
-                      //const ratingValue = i +1;
+                      const ratingValue = i +1;
                         return(
                           //en reseña se cambi por lo  dela api y cambiar los ratingValue por ejeplo imt.user.name
                      // {reseña.map((item)=>(
@@ -153,7 +156,7 @@ function FromHome({ setRestaurant , setId}) {
                 );
             })}
                  </div>
-                </div>
+                </div> */}
             </div>
           ))}
         </div>
