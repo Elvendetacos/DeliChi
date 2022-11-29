@@ -7,18 +7,20 @@ h3{
 .table{
   border-collapse: collapse;
   width: 100%;
+  height: 100%;
 }
 
 .table td, .table th{
   padding: 1px;
 }
-.table tr:nth-child(even){
-    color:#252525;
+
+.table th:hover{
+  background-color:none;
 }
+
 .table tr:hover {
     background-color: #252525;
-    color:#2ACD53;
-  
+    color: aqua;
 }
 
 .table thead{
@@ -43,6 +45,7 @@ h3{
     display: flex;
     justify-content: center;
     align-items: flex-start;
+      background-color:black;
 }
 .rc{
   width: 100%;
@@ -50,6 +53,7 @@ h3{
   display: flex;
   justify-content: center;
   align-items: stretch;
+  overflow: scroll;
   border: 5px solid #e9e9e9;
 
 }

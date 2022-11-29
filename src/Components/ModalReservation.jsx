@@ -64,7 +64,7 @@ const Modal = ({ open, onClose, idUser }) => {
             <h4>presiona para editar</h4>
             <div className="reservacion">
               <div className="rc">
-                <table className="table">
+{/*                 <table className="table">
                   <thead>
                     <tr>
                       <th>Hora</th>
@@ -75,19 +75,19 @@ const Modal = ({ open, onClose, idUser }) => {
                   <tbody className="table-group-dividier">
                     {reservations.map((item) => (
                       <tr onClick={()=>edit(item)}>
-                        <th>
+                        <td>
                           {item.hour}
-                        </th>
-                        <th>
+                        </td>
+                        <td>
                           {item.date}
-                        </th>
-                        <th>
+                        </td>
+                        <td>
                           {item.people}
-                        </th>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
-                </table>
+                </table> */}
               </div>
             </div>
           </div>
