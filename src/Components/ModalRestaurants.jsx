@@ -1,9 +1,10 @@
 import '../assets/Styles/ModalRestaurants.css'
+import '../assets/Styles/Star.css'
 import Rafa from '../assets/Img/banner-placeholder.jpg'
 import Cancel from '../assets/Img/cancel.svg'
 import AddReservation from './AddReservation';
 import { useEffect, useState } from 'react';
-//
+import {FaStar} from 'react-icons/fa'
 
 function ModalRestaurants({setRestaurant, id, idUser}) {
     
@@ -47,6 +48,32 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
     }
 
     const [modal, setModal] = useState(false)
+
+    useEffect(()=>{
+        //cmabar el id y el reseña como esta en la base de datos
+        fetch(`http://localhost:8080/reseña/${id}`, {
+      method: "GET", headers: {
+          Accept: "aplication/json",
+          "Content-Type": "Aplication/json"
+      }, mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+      },
+
+  })
+     .then((response) => {return response.json()})
+     .then((respuesta => setRating(respuesta.data)))
+     .catch((error)=>{
+        console.error('Error: ', error);
+     });
+      })
+    
+    const [rating,setRating] = useState(null);
+    const [hover, setHover] = useState(null);
+
    
     return ( 
         <>
@@ -124,12 +151,29 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                 </div>
                 <div className='resena'>
                     <p><b>Reseña</b></p>
-                    <p>aca va las estrellas</p>
+                    <div>
+                    {[...Array(5)].map((star, i)=>{
+                      const ratingValue = i +1;
+
+                     return(
+                       <label>
+                        <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)}
+                        />
+                        <FaStar className='star' color={ratingValue  <= (hover || rating) ? "#FFFF00" : "FFFFF"} 
+                        size={30} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={()=> setHover(null)}
+                        />
+                    </label>
+                );
+            })}
+            
+                 </div>
                 </div>
             </div>
         </div>
         </>
      );
+        
+        
 }
 
 export default ModalRestaurants;

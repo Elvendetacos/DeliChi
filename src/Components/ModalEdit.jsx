@@ -1,7 +1,5 @@
 import React from 'react'
 import "../assets/Styles/ReservationCeo.css"
-import jiji from '../assets/img/xD.jpg'
-
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {useEffect,useState} from "react";
@@ -21,7 +19,6 @@ const Modal = ({open,onClose, reservacion}) => {
 return(
     <div className="overlay">
       <div className="modalContainer">
-      <img src={jiji} alt=''/>
       <div className="modalRight ">
       <p onClick={onClose} className="closeBtn">X</p>
       <div className="content">

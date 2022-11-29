@@ -1,4 +1,5 @@
 import "../assets/Styles/Home.css";
+import '../assets/Styles/Star.css'
 import Rafa from "../assets/Img/rafa.jpg";
 import Chiapa from "../assets/Img/Chiapa.jpg";
 import Tuxtla from "../assets/Img/Tuxtla.jpg";
@@ -8,7 +9,8 @@ import Img1 from "../assets/Img/placeholder1.jpg";
 import Img2 from "../assets/Img/placeholder2.jpg";
 import Img3 from "../assets/Img/placeholder3.jpg";
 import Img4 from "../assets/Img/placeholder4.jpg";
-import { useEffect, useState} from "react";
+import {FaStar} from 'react-icons/fa'
+import { useEffect, useState, useRef} from "react";
 
 function FromHome({ setRestaurant , setId}) {
 
@@ -93,6 +95,11 @@ function FromHome({ setRestaurant , setId}) {
       IMG: Suchiapa,
     },
   ];
+
+
+  //const url='' poner la api
+  const [rating,setRating] = useState(false);
+  const [hover, setHover] = useState(false);
  
   return (
     <>
@@ -125,6 +132,28 @@ function FromHome({ setRestaurant , setId}) {
               </div>
               {/* Aqui es para las estrellas previzualizadas del restaurante */}
               <div className="ranked-restaurant"></div>
+              <div className='resena'>
+                    <p><b>Reseña</b></p>
+                    <div>
+                    {[...Array(5)].map((star, i)=>{
+                      //const ratingValue = i +1;
+                        return(
+                          //en reseña se cambi por lo  dela api y cambiar los ratingValue por ejeplo imt.user.name
+                     // {reseña.map((item)=>(
+                       <label>
+                      
+                        <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)}
+                        />
+                        <FaStar className='star' color={ratingValue  <= (hover || rating) ? "#FFFF00" : "FFFFF"} 
+                        size={30} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={()=> setHover(null)}
+                        />
+                    </label>
+                     // ))}
+                     
+                );
+            })}
+                 </div>
+                </div>
             </div>
           ))}
         </div>
