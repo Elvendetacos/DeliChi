@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BusinessRegister from "../Pages/BusinessRegister";
 import ListRestaurant from "../Pages/ListRestaurant";
-import RestauranrEdit from "../Pages/RestaurantEdit";
+import RestaurantEdit from "../Pages/RestaurantEdit";
 import Restaurants from "../Pages/Restaurants";
 import Home from "../Pages/Home";
 import Contexto from "../Contextos/ContextoCeo";
@@ -24,7 +24,7 @@ function App() {
           >
             <Routes>
               <Route path="/Restaurants" element={<Restaurants />}></Route>
-              <Route path="/Restaurant" element={<RestauranrEdit />}></Route>
+              <Route path="/Restaurant" element={<RestaurantEdit />}></Route>
               <Route path="/List" element={<ListRestaurant />}></Route>
               <Route path="/Register" element={<BusinessRegister />}></Route>
               <Route path="/Restaurante" element={<Resta/>}></Route>
