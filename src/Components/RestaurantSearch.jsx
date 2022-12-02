@@ -100,7 +100,7 @@ function RestaurantSearch({setRestaurant, setId }) {
             <option value={item.id}>{item.name}</option>
           ))}
         </select>
-        <button onClick={searchByZone}>buscar</button>
+        <button  className='buscar' onClick={searchByZone}>buscar</button>
       </div>
       <div className="conteiner-list">
         <div className="list-restaurants">

@@ -152,14 +152,18 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                     <button>Cancelar</button>
                     <button>Editar</button>
                     </div>*/}
-                <div className='resena'>
-                    <p><b>Reseña</b></p>
-                    <div>
+                        <div className='resena'>
+                            <p>Comentarios:</p>
+                            <input type="text"></input>
+                            <p>Fecha:</p>
+                            <input type="text"></input>
+                             <p>Reseña: </p>                    
                     {[...Array(5)].map((star, i)=>{
                       const ratingValue = i +1;
-
                      return(
+                      
                        <label>
+
                         <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)}
                         />
                         <FaStar className='star' color={ratingValue  <= (hover || rating) ? "#FFFF00" : "FFFFF"} 
@@ -168,9 +172,12 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                      </label>
                 );
             })}
-            
-                 </div>
-                </div>
+        
+               </div> 
+               <div className='pu'>
+                <button className='public'>Publicar</button> 
+               </div>
+               
             </div>
         </div>
         </>

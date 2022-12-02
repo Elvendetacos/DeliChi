@@ -90,3 +90,13 @@
   color: white;
   text-align: center;
 }
+
+.buscar{
+  width: 80px;
+    height: 20px;
+    background-color: #2ACD53;
+    border: #2ACD53;
+    color: black;
+    border-radius: 8px;
+    text-align: center;
+}

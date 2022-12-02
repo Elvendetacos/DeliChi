@@ -119,7 +119,7 @@ function FromHome({ setRestaurant , setId}) {
           <p>Restaurantes en {zoneName.name}:</p>
           
         </div>
-        <button onClick={page}>ver mas</button>
+        <button className="vermas" onClick={page}>Ver más</button>
         <div className="conteiner-view-restaurants">
           {zone.map((restaurante) => (
             <div

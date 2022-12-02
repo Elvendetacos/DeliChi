@@ -147,19 +147,27 @@
     background-color: rgb(255, 255, 255);
 }
 
-.reservacionC button{
+.public{
     background-color: #252323;
     color:white;
     border:#2ACD53;
-    height: 20%;
-    width: 20%;
+    height: 8%;
+    width: 10%;
     border-radius: 5px;
     cursor: pointer;
+    align-items: center;
+    
+}
+
+.pu{
+    text-align: center;
+    font-size: 18px;
 }
 
 .resena{
-    height: 20%;
+    height: 40%;
     width: 90%;
+    left: 50%;
     margin-left: 5.5%;
     background-color: #252525;
     color: white;
@@ -168,6 +176,20 @@
     text-align: center;
     
 }
+
+.colum{
+    column-count: 2;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    color: white;
+    background-color: #252525;
+    border: #2525;
+  }
 
 
 
