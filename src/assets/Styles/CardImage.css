@@ -1,7 +1,8 @@
 .image-resources-view{
     width: 90%;
     margin-left: 5%;
-    height: 120px;
+    height: auto;
+    min-width: 200px;    
     object-fit: fill;
     border-bottom: 1px black solid;
 }

@@ -181,15 +181,3 @@
     column-count: 2;
 }
 
-input[type=text] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    color: white;
-    background-color: #252525;
-    border: #2525;
-  }
-
-
-

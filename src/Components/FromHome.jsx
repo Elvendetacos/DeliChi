@@ -20,7 +20,7 @@ function FromHome({ setRestaurant , setId}) {
   const [zoneName, setZoneName] = useState([])
 
   useEffect(()=>{
-    fetch(`http://localhost:8080/zone/3/restaurants/`, {
+    fetch(`http://localhost:8080/zone/1/restaurants/`, {
       method: "GET",
       mode: 'cors',
       cache: 'no-cache',
@@ -40,7 +40,7 @@ function FromHome({ setRestaurant , setId}) {
   }, [1])
 
   const Fetch2 = () =>{
-    fetch(`http://localhost:8080/zone/3/`, {
+    fetch(`http://localhost:8080/zone/1/`, {
       method: "GET",
       mode: 'cors',
       cache: 'no-cache',
@@ -103,7 +103,7 @@ function FromHome({ setRestaurant , setId}) {
  
   return (
     <>
-      <div className="slides-section">
+{/*       <div className="slides-section">
         <div className="slider-conteiner">
           <div className="anterior">
             <p>&lt;</p>
@@ -113,7 +113,7 @@ function FromHome({ setRestaurant , setId}) {
             <p>&gt;</p>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="restaurants-section">
         <div className="restaurants-in">
           <p>Restaurantes en {zoneName.name}:</p>

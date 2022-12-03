@@ -9,6 +9,7 @@ import axios from "axios";
 import ModalEdit from "./ModalEdit";
 const imageType = /image\/(png|jpg|jpeg|svg)/i;
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
+import Swal from "sweetalert2";
 
 function FromEdit({
   setMesa,
@@ -24,7 +25,9 @@ function FromEdit({
   capacityTable,
 }) {
   const [restaurantData, setRestaurantData] = useState({});
-  const { idRestaurant } = useContext(ContextoRestaurant);
+/*   const [idNewRestaurant, setIdNewRestaurant] = useState(); */
+  var time; 
+  const { idRestaurant, setIdRestaurant } = useContext(ContextoRestaurant);
   const a = useNavigate();
   const profile1 = useRef(null);
 
@@ -219,9 +222,9 @@ function FromEdit({
 
   useEffect(() => {
     zonesData();
-    resourcesView();
     bannerView();
     profileView();
+    resourcesView();
   }, [{ profile, banner, imageFiles }]);
 
   const slider = useRef(null);
@@ -242,156 +245,211 @@ function FromEdit({
     }
   };
 
-/*
-  async function uploadImages() {
-    let fileField = document.querySelector("#references");
-
-    let totalFilesToUpload = fileField.files.length;
-
-    // Array of promises
-    let uploads = [
-      uploadData,
-      uploadLogoImage(),
-      uploadBannerImage(fileBanner),
-    ];
-     
-    for (let i = 0; i < totalFilesToUpload; i++) {
-      uploads.push(uploadImages(fileField.files[i]));
-    } 
-
-    // Method await that await all the uploads
-    await Promise.all(uploads);
-  } */
-
-  // Basic way to upload an image
-  const uploadLogoImage = () => {
+  // Upload images
+  const uploadLogoImage = async (methodType, idNewRestaurant) => {
+    console.log(
+      "El id del ceo es: " + id + ", el id del restaurante es: " + idNewRestaurant
+    );
     const restaurantLogo = document.getElementById("profile").files[0];
     let formData = new FormData();
     formData.append("file", restaurantLogo);
 
-    fetch(
-      `http://localhost:8080/image/ceo/${id}/restaurant/${idRestaurant}/logo`,
+    const path = idRestaurant == undefined ? "logo" : "updateLogo";
+
+    await fetch(
+      `http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/${path}`,
       {
-        method: "POST",
+        method: methodType,
         mode: "cors",
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
-          "Accept": "application/json"
+          Accept: "application/json",
         },
         body: formData,
       }
     )
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {console.log(data), doUploadImages(idNewRestaurant);})
       .catch((error) => {
         console.error("Error:", error);
-      }); 
+      });
   };
 
-  const uploadBannerImage = () => {
+  const uploadBannerImage = async (methodType, idNewRestaurant) => {
+    console.log(
+      "El id del ceo es: " + id + ", el id del restaurante es: " + idNewRestaurant
+    );
     const restaurantBanner = document.getElementById("banner").files[0];
     let formData = new FormData();
     formData.append("file", restaurantBanner);
 
-    fetch(
-      `http://localhost:8080/image/ceo/${id}/restaurant/${idRestaurant}/banner`,
+    const path = idRestaurant == undefined ? "banner" : "updateBanner";
+
+    await fetch(
+      `http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/${path}`,
+      {
+        method: methodType,
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {console.log(data),
+        uploadLogoImage("POST", idNewRestaurant)})
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  const doUploadImages = async (idNewRestaurant) => {
+    const fileField = document.querySelector("#references");
+    let totalFilesToUpload = fileField.files.length;
+
+    let uploads = [];
+
+    for (let i = 0; i < totalFilesToUpload; i++) {
+      uploads.push(uploadFile(fileField.files[i], idNewRestaurant));
+    }
+    await Promise.all(uploads);
+  }, Swal.close();
+
+  async function uploadFile(file, idNewRestaurant) {
+    let formData = new FormData();
+    formData.append("file", file);
+
+    return await fetch(
+      `http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/image`,
       {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
         },
         body: formData,
       }
     )
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {console.log(data)})
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  const uploadData = () => {
+    const formData = new FormData(form.current);
+
+    fetch(
+      `http://localhost:8080/restaurant/ceo/${id}/zone/${tipoZona.current.value}`,
+      {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          phoneNumber: formData.get("phoneNumber"),
+          address: formData.get("address"),
+          schedule: hora,
+          kitchen: tipoComida.current.value,
+          description: formData.get("description"),
+          menu: MenuF,
+          tableNumber: numberTable,
+          tableCapacity: capacityTable,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((respuest) => {
+        Swal.fire({
+          title: 'Creando restaurante',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          didOpen: () =>{
+            Swal.showLoading()
+            uploadBannerImage("POST", respuest.data.id)
+          }
+        })
+      })
+      .catch((error) => {
+        alert("hay un error" + error);
+      });
+  };
+
+  const updateData = async () => {
+    const formData = new FormData(form.current);
+
+    await fetch(
+      `http://localhost:8080/restaurant/${idRestaurant}/zone/${tipoZona.current.value}`,
+      {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          phoneNumber: formData.get("phoneNumber"),
+          address: formData.get("address"),
+          schedule: hora,
+          kitchen: tipoComida.current.value,
+          description: formData.get("description"),
+          menu: MenuF,
+          tableNumber: numberTable,
+          tableCapacity: capacityTable,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((respuest) => console.log(respuest.data.id))
       .catch((error) => {
         console.error("Error:", error);
       });
   };
 
   // Falta hacer que se suban todas las imagenes una por una
-  // Falta hacerlo asincrono
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const logoExist =
+      document.getElementById("profile").files[0] != undefined ? true : false;
+    const bannerExist =
+      document.getElementById("banner").files[0] != undefined ? true : false;
+    const fileField = document.querySelector("#references");
+      let totalFilesToUpload = fileField.files.length;
+      time = (totalFilesToUpload*1000);
 
-    const formData = new FormData(form.current);
+    if (logoExist == false)
+      return alert("Tienes que subir un logo para tu negocio");
+    if (bannerExist == false)
+      return alert("Tienes que subir una imagen de banner para tu negocio");
 
     if (idRestaurant == undefined) {
-      // Basic way to upload an image
-      //uploadBannerImage();
-      uploadLogoImage();
-
-      fetch(
-        `http://localhost:8080/restaurant/ceo/${id}/zone/${tipoZona.current.value}`,
-        {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          credentials: "same-origin",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: formData.get("name"),
-            phoneNumber: formData.get("phoneNumber"),
-            address: formData.get("address"),
-            schedule: hora,
-            kitchen: tipoComida.current.value,
-            description: formData.get("description"),
-            menu: MenuF,
-            tableNumber: numberTable,
-            tableCapacity: capacityTable,
-          }),
-        }
-      )
-        .then((response) => response.json())
-        .then((respuest) => {
-          console.log(respuest.data.id), a("/List");
-        })
-        .catch((error) => {
-          alert("hay un error" + error);
-        });
+      // When restaurant not exist}
+      uploadData();
+      /* uploadBannerImage("POST");
+      uploadLogoImage("POST");
+      doUploadImages(); */
     } else {
-      // Basic way to upload an image
-      //uploadBannerImage();
-      uploadLogoImage();
-
-      fetch(
-        `http://localhost:8080/restaurant/${idRestaurant}/zone/${tipoZona.current.value}`,
-        {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          credentials: "same-origin",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: formData.get("name"),
-            phoneNumber: formData.get("phoneNumber"),
-            address: formData.get("address"),
-            schedule: hora,
-            kitchen: tipoComida.current.value,
-            description: formData.get("description"),
-            menu: MenuF,
-            tableNumber: numberTable,
-            tableCapacity: capacityTable,
-          }),
-        }
-      )
-        .then((response) => response.json())
-        .then((respuest) => console.log(respuest.data.id))
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      // When restaurant exist
+      updateData();
+      uploadBannerImage("PUT");
+      uploadLogoImage("PUT");
+      doUploadImages();
     }
   };
 
@@ -481,6 +539,7 @@ function FromEdit({
                         id="references"
                         onChange={changeResources}
                         multiple
+                        accept="image/*"
                       />
                     </div>
                   </div>

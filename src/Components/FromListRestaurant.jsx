@@ -14,7 +14,7 @@ function FromListRegister({setEditar, setIdRestaurant}) {
   const { id } = useContext(Contexto);
 
   const RestaurantList = () => {
-    fetch(`http://localhost:8080/ceo/1/restaurants`, {
+    fetch(`http://localhost:8080/ceo/${id}/restaurants`, {
       method: "GET",
       headers: {
         Accept: "aplication/json",
@@ -40,8 +40,8 @@ function FromListRegister({setEditar, setIdRestaurant}) {
 
 
   const newRestaurant = () => {
-
     navigate("/Restaurant");
+    setIdRestaurant(undefined);
   };
 
   const editRestaurant = (idRestaurant) => {
