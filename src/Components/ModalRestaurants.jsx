@@ -155,8 +155,6 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                         <div className='resena'>
                             <p>Comentarios:</p>
                             <input type="text"></input>
-                            <p>Fecha:</p>
-                            <input type="text"></input>
                              <p>Reseña: </p>                    
                     {[...Array(5)].map((star, i)=>{
                       const ratingValue = i +1;
@@ -166,8 +164,8 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
 
                         <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)}
                         />
-                        <FaStar className='star' color={ratingValue  <= (hover || rating) ? "#FFFF00" : "FFFFF"} 
-                        size={30} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={()=> setHover(null)}
+                        <FaStar className='star' color={ratingValue  <= (rating || hover) ? "#FFFF00" : "FFFFF"} 
+                        size={30}  onMouseLeave={()=> setHover(null)} 
                         />
                      </label>
                 );
@@ -176,6 +174,11 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                </div> 
                <div className='pu'>
                 <button className='public'>Publicar</button> 
+               </div>
+
+               <div className='com'>
+                <h4>COMENTAIOS</h4>
+                <input type="text"/>
                </div>
                
             </div>

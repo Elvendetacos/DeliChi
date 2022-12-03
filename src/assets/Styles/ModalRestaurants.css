@@ -165,7 +165,7 @@
 }
 
 .resena{
-    height: 40%;
+    height: 20%;
     width: 90%;
     left: 50%;
     margin-left: 5.5%;
@@ -177,7 +177,16 @@
     
 }
 
-.colum{
-    column-count: 2;
-}
 
+
+.com{
+    height: 40%;
+    width: 90%;
+    left: 50%;
+    margin-left: 5.5%;
+    background-color: #252525;
+    color: white;
+    border-radius: 5px;
+    margin-top: 8%;
+    text-align: center;
+}
