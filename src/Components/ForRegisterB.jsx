@@ -1,5 +1,6 @@
 import "../assets/Styles/BusinessRegister.css";
 import { useRef } from "react";
+import Swal from "sweetalert2";
 
 function ForRegisterB({estado, cambiarEstado}) {
 
@@ -29,6 +30,13 @@ function ForRegisterB({estado, cambiarEstado}) {
   })
   .then((response) => response.json())
   .then((data) => console.log(data))
+  .then(() => Swal.fire({
+    position: 'top',
+    icon: 'success',
+    title: 'CEO Registrado',
+    showConfirmButton: false,
+    timer: 1500
+  }))
   .catch((error) => {
     console.error("Error:", error);
   });

@@ -26,7 +26,7 @@ function FromEdit({
 }) {
   const [restaurantData, setRestaurantData] = useState({});
 /*   const [idNewRestaurant, setIdNewRestaurant] = useState(); */
-  var time; 
+  var time;
   const { idRestaurant, setIdRestaurant } = useContext(ContextoRestaurant);
   const a = useNavigate();
   const profile1 = useRef(null);
@@ -34,6 +34,7 @@ function FromEdit({
   const MenuF = JSON.stringify(menu);
 
   const banner1 = useRef(null);
+
 
   // id -> ceoId
   const { id } = useContext(Contexto);
@@ -276,7 +277,7 @@ function FromEdit({
       });
   };
 
-  const uploadBannerImage = async (methodType, idNewRestaurant) => {
+  const uploadBannerImage = async (idNewRestaurant) => {
     console.log(
       "El id del ceo es: " + id + ", el id del restaurante es: " + idNewRestaurant
     );
@@ -285,6 +286,7 @@ function FromEdit({
     formData.append("file", restaurantBanner);
 
     const path = idRestaurant == undefined ? "banner" : "updateBanner";
+    let methodType = idRestaurant == undefined ? "POST" : "PUT"
 
     await fetch(
       `http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/${path}`,
@@ -300,8 +302,9 @@ function FromEdit({
       }
     )
       .then((res) => res.json())
-      .then((data) => {console.log(data),
-        uploadLogoImage("POST", idNewRestaurant)})
+      .then((data) => {
+        console.log(data),
+        uploadLogoImage(methodType, idNewRestaurant)})
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -315,15 +318,15 @@ function FromEdit({
 
     for (let i = 0; i < totalFilesToUpload; i++) {
       uploads.push(uploadFile(fileField.files[i], idNewRestaurant));
-    }
+    } 
     await Promise.all(uploads);
-  }, Swal.close();
+  }
 
   async function uploadFile(file, idNewRestaurant) {
     let formData = new FormData();
     formData.append("file", file);
 
-    return await fetch(
+      await fetch(
       `http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/image`,
       {
         method: "POST",
@@ -343,10 +346,10 @@ function FromEdit({
       });
   }
 
-  const uploadData = () => {
+  const uploadData = async () => {
     const formData = new FormData(form.current);
 
-    fetch(
+    await fetch(
       `http://localhost:8080/restaurant/ceo/${id}/zone/${tipoZona.current.value}`,
       {
         method: "POST",
@@ -373,12 +376,13 @@ function FromEdit({
       .then((response) => response.json())
       .then((respuest) => {
         Swal.fire({
-          title: 'Creando restaurante',
+          timer: time,
+          title: "Creando restaurante",
           allowOutsideClick: false,
           allowEscapeKey: false,
           didOpen: () =>{
             Swal.showLoading()
-            uploadBannerImage("POST", respuest.data.id)
+            uploadBannerImage(respuest.data.id)
           }
         })
       })
@@ -415,13 +419,22 @@ function FromEdit({
       }
     )
       .then((response) => response.json())
-      .then((respuest) => console.log(respuest.data.id))
+      .then((respuest) => 
+      Swal.fire({
+        timer: time,
+        title: "Actualizando restaurante",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () =>{
+          Swal.showLoading()
+          uploadBannerImage(idRestaurant)
+        }
+      }))
       .catch((error) => {
         console.error("Error:", error);
       });
   };
 
-  // Falta hacer que se suban todas las imagenes una por una
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -431,25 +444,20 @@ function FromEdit({
       document.getElementById("banner").files[0] != undefined ? true : false;
     const fileField = document.querySelector("#references");
       let totalFilesToUpload = fileField.files.length;
-      time = (totalFilesToUpload*1000);
+      time = (totalFilesToUpload*1500) + 2000;
 
     if (logoExist == false)
-      return alert("Tienes que subir un logo para tu negocio");
+      return Swal.fire('Necesitas subir un logo para continuar');
     if (bannerExist == false)
-      return alert("Tienes que subir una imagen de banner para tu negocio");
+      return Swal.fire('Necesitas subir un banner para continuar');
 
     if (idRestaurant == undefined) {
       // When restaurant not exist}
       uploadData();
-      /* uploadBannerImage("POST");
-      uploadLogoImage("POST");
-      doUploadImages(); */
+    
     } else {
       // When restaurant exist
       updateData();
-      uploadBannerImage("PUT");
-      uploadLogoImage("PUT");
-      doUploadImages();
     }
   };
 
