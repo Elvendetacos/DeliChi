@@ -6,10 +6,11 @@ import AddReservation from './AddReservation';
 import { useEffect, useState } from 'react';
 import {FaStar} from 'react-icons/fa'
 
-function ModalRestaurants({setRestaurant, id, idUser}) {
+function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
     
     const [dato, setDato]= useState(null)
     const [menu, setMenu]=useState([])
+    const [imagen, setImagen] = useState(null);
     const [Logueado, setLogueado] = useState(false)
     const [reservacionData, setReservacionData] = useState([])
     let Hora = new Array([]);
@@ -21,6 +22,7 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
 
 
     useEffect(()=>{
+
         fetch(`http://localhost:8080/restaurant/${id}`, {
             method: "GET", headers: {
                 Accept: "aplication/json",
@@ -34,16 +36,35 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
             },
       
         })
-            .then((response) => {return response.json()})
-            .then((respuesta => {setDato(respuesta.data), setMenu(JSON.parse(respuesta.data.menu))}))
-            .catch((error) => {
+        .then((response) => {return response.json()})
+        .then((respuesta => {setDato(respuesta.data), setMenu(JSON.parse(respuesta.data.menu))}))
+        .catch((error) => {
                 console.error('Error:', error);
-            });
-            
+        });
+
+        fetch(`http://localhost:8080/image/getBanner/${id}`, {
+            method: "GET", headers: {
+                Accept: "aplication/json",
+                "Content-Type": "Aplication/json"
+            }, mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => {return response.json()})
+        .then((respuesta => {setImagen(respuesta.data.fileUrl)}))
+        .catch((error) => {
+                console.error('Error:', error);
+        });
+       
     }, [1])
 
     const login = ()  =>{
         if(idUser==undefined){
+      
             alert("Aun no estas logueado :(")
         }else{
             setModal(true)
@@ -72,7 +93,7 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
      .catch((error)=>{
         console.error('Error: ', error);
      });*/
-      })
+    })
     
     const [rating,setRating] = useState(null);
     const [hover, setHover] = useState(null);
@@ -91,7 +112,8 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                     <img src={Cancel} alt="" onClick={()=>setRestaurant(false)} />
                 </div>
                 <div className='image-banner-restaurant'>
-                    <img src={Rafa} alt="" />
+                    
+                    <img src={imagen} alt="" />
                 </div>
                 <div className='restaurant-name-in'><p>{dato && dato.name}</p></div>
                 <div className='data-restaurant'>
@@ -177,8 +199,9 @@ function ModalRestaurants({setRestaurant, id, idUser}) {
                </div>
 
                <div className='com'>
-                <h4>COMENTAIOS</h4>
-                <input type="text"/>
+                <h4>COMENTARIOS</h4>
+                
+                <input type="text"  disabled = "disabled" />
                </div>
                
             </div>

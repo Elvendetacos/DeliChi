@@ -16,7 +16,11 @@ import { useNavigate } from "react-router-dom";
 function FromHome({ setRestaurant , setId}) {
 
   const navigate = useNavigate();
+  
+  // Para obtener restaurantes de la zona (object)
   const [zone, setZone] = useState([])
+
+  // Para obtener nombre de zona
   const [zoneName, setZoneName] = useState([])
 
   useEffect(()=>{
@@ -32,11 +36,14 @@ function FromHome({ setRestaurant , setId}) {
 
   })
       .then((response) => {return response.json()})
-      .then((respuesta => setZone(respuesta.data)))
+      .then((respuesta => {setZone(respuesta.data), console.log(respuesta.data)}))
       .catch((error) => {
           console.error('Error:', error);
       });
+
+      // Fetch para obtener nombre de la zona
       Fetch2()
+
   }, [1])
 
   const Fetch2 = () =>{
@@ -52,11 +59,12 @@ function FromHome({ setRestaurant , setId}) {
 
   })
       .then((response) => {return response.json()})
-      .then((respuesta => setZoneName(respuesta.data)))
+      .then((respuesta => {setZoneName(respuesta.data), console.log(respuesta.data)}))
       .catch((error) => {
           console.error('Error:', error);
       });
   }
+
 
   const Resta = (id) =>{
     setId(id)
@@ -98,12 +106,13 @@ function FromHome({ setRestaurant , setId}) {
   const page = () => {
     navigate("/Restaurants");
   };
+
   const [rating,setRating] = useState(false);
   const [hover, setHover] = useState(false);
  
   return (
     <>
-{/*       <div className="slides-section">
+      {/*<div className="slides-section">
         <div className="slider-conteiner">
           <div className="anterior">
             <p>&lt;</p>
@@ -117,50 +126,30 @@ function FromHome({ setRestaurant , setId}) {
       <div className="restaurants-section">
         <div className="restaurants-in">
           <p>Restaurantes en {zoneName.name}:</p>
-          
         </div>
         <button className="vermas" onClick={page}>Ver más</button>
         <div className="conteiner-view-restaurants">
-          {zone.map((restaurante) => (
-            <div
-              className="card-restaurant"
-              onClick={()=>Resta(restaurante.id)}
-            >
-              
-              <div className="img-restaurant">
-                <img src={Rafa} alt="" />
-              </div>
-              <div className="name-restaurant">
-                <p>{restaurante.name}</p>
-              </div>
-              {/* Aqui es para las estrellas previzualizadas del restaurante */}
-              <div className="ranked-restaurant"></div>
-              {/* <div className='resena'>
-                    <p><b>Reseña</b></p>
-                    <div>
-                    {[...Array(5)].map((star, i)=>{
-                      const ratingValue = i +1;
-                        return(
-                          //en reseña se cambi por lo  dela api y cambiar los ratingValue por ejeplo imt.user.name
-                     // {reseña.map((item)=>(
-                       <label>
-                      
-                        <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)}
-                        />
-                        <FaStar className='star' color={ratingValue  <= (hover || rating) ? "#FFFF00" : "FFFFF"} 
-                        size={30} onMouseEnter={() => setHover(ratingValue)} onMouseLeave={()=> setHover(null)}
-                        />
-                    </label>
-                     // ))}
-                     
-                );
-            })}
-                 </div>
-                </div> */}
-            </div>
-          ))}
+          {/**
+           * El zone.map recorre todos los restaurantes ()
+           */}
+              {zone.map((restaurante) => (
+
+                <div className="card-restaurant" onClick={()=>Resta(restaurante.id)}>
+                  
+                  <div className="img-restaurant">
+                    <img src={restaurante.image[1].fileUrl} alt="" />
+                  </div>
+                  <div className="name-restaurant">
+                    <p>{restaurante.name}</p>
+                  </div>
+                  <div className="ranked-restaurant"></div>
+                  
+                </div>
+
+              ))}
         </div>
       </div>
+
       <div className="locality-section">
         <div className="municipios">
           <p>Municipios</p>

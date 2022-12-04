@@ -446,12 +446,13 @@ function FromEdit({
       let totalFilesToUpload = fileField.files.length;
       time = (totalFilesToUpload*1500) + 2000;
 
-    if (logoExist == false)
-      return Swal.fire('Necesitas subir un logo para continuar');
-    if (bannerExist == false)
-      return Swal.fire('Necesitas subir un banner para continuar');
 
     if (idRestaurant == undefined) {
+      if (logoExist == false)
+      return Swal.fire('Necesitas subir un logo para continuar');
+      if (bannerExist == false)
+      return Swal.fire('Necesitas subir un banner para continuar');
+
       // When restaurant not exist}
       uploadData();
     
