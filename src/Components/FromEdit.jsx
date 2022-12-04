@@ -23,6 +23,7 @@ function FromEdit({
   hora,
   numberTable,
   capacityTable,
+  setOpenModal
 }) {
   const [restaurantData, setRestaurantData] = useState({});
 /*   const [idNewRestaurant, setIdNewRestaurant] = useState(); */
@@ -446,8 +447,8 @@ function FromEdit({
       let totalFilesToUpload = fileField.files.length;
       time = (totalFilesToUpload*1500) + 2000;
 
-
     if (idRestaurant == undefined) {
+
       if (logoExist == false)
       return Swal.fire('Necesitas subir un logo para continuar');
       if (bannerExist == false)
@@ -481,8 +482,7 @@ function FromEdit({
     setPerson(person);
     setEstabModal(true);
   };
-
-  const [openModal, setOpenModal] = useState(false);
+  
   return (
     <>
       <form onSubmit={handleSubmit} ref={form}>
@@ -673,12 +673,7 @@ function FromEdit({
             <button type="submit">Guardar Datos</button>
 
             <div>
-              <button onClick={() => setOpenModal(true)}>Reservaciones</button>
-              <ModalEdit
-                reservacion={reservacion}
-                open={openModal}
-                onClose={() => setOpenModal(false)}
-              />
+              <button type="button" onClick={() => setOpenModal(true)}>Reservaciones</button>
             </div>
           </div>
         </div>

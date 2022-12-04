@@ -3,6 +3,7 @@ import "../assets/Styles/ModalLogin.css";
 import Cancel from "../assets/Img/cancel.svg";
 import { useRef } from "react";
 import { useNavigate } from 'react-router';
+import Swal from 'sweetalert2'
 
 
 function ModalLogin({setLogin, setIdUser}) {
@@ -45,7 +46,12 @@ function ModalLogin({setLogin, setIdUser}) {
       if (apiPassword == passwordLogin) {
           setIdUser(api1)
           console.log(passwordLogin)
-          alert("Bienvenido "+apiName+" :D")
+          Swal.fire({
+            position: "top",
+            title: 'Bienvenido ' + apiName + ' :D',
+            showConfirmButton: false,
+            timer: 1500
+          })
       } else if (apiPassword != passwordLogin) {
           console.log(passwordLogin)
           alert("Contraseña no valida")

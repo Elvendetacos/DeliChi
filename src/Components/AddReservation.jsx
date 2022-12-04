@@ -1,5 +1,6 @@
 import "../assets/Styles/AddReservation.css";
 import { useEffect, useState, useRef } from "react";
+import Swal from "sweetalert2";
 
 function AddReservation({setModal, idUser, idRestaurant, reser}) {
     var today = new Date();
@@ -33,6 +34,12 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
     })
     .then((response) => response.json())
     .then((data) => (data))
+    .then(() => Swal.fire({
+      icon: 'success',
+      title: 'Reservacion exitosa',
+      showConfirmButton: false,
+      timer: 1500
+    }))
     .catch((error) => {
       console.error("Error:", error);
     });

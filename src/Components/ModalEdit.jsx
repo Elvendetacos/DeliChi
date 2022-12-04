@@ -11,14 +11,14 @@ const url =  'http://localhost:8080/reservation/'
 const  ReservationCeo = () => {
 const {reservation} = useContext(ContextoR);}
 
-const Modal = ({open,onClose, reservacion}) => {
+const Modal = ({open, reservacion, setOpenModal}) => {
     if(!open)return null;
 
 return(
     <div className="overlay">
       <div className="modalContainer">
       <div className="modalRight ">
-      <p onClick={onClose} className="closeBtn">X</p>
+      <p onClick={() => setOpenModal(!open)} className="closeBtn">X</p>
       <div className="content">
       <h3>REGISTRO DE RESERVACIONES</h3>
         <div className="reservacion"> 
@@ -51,7 +51,7 @@ return(
         
         </div>    
         </div>
-        <button onClick={onClose}>aceptar</button>
+        <button onClick={() => setOpenModal(!open)}>aceptar</button>
       </div>
       </div>
       </div>

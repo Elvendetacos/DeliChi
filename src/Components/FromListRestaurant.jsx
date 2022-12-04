@@ -44,7 +44,7 @@ function FromListRegister({setEditar, setIdRestaurant}) {
     setIdRestaurant(undefined);
   };
 
-  const editRestaurant = (idRestaurant) => {
+  const editRestaurant =  (idRestaurant) => {
     setIdRestaurant(idRestaurant)
     navigate("/Restaurant");
   };
@@ -67,6 +67,7 @@ function FromListRegister({setEditar, setIdRestaurant}) {
               ))}
             <div className="add-restaurant" onClick={newRestaurant}>
               <img src={Add} alt="" />
+              
               <p>Agregar un restaurante</p>
             </div>
           </div>

@@ -5,20 +5,26 @@ import Cancel from '../assets/Img/cancel.svg'
 import AddReservation from './AddReservation';
 import { useEffect, useState } from 'react';
 import {FaStar} from 'react-icons/fa'
+import { validate } from 'uuid';
+import {handleSumit} from 'react'
+import { useForm } from "react-hook-form";
 
 function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
-    
+
+    const { handleSubmit } = useForm();
+
     const [dato, setDato]= useState(null)
+    const[comment, setComment]= useState([])
     const [menu, setMenu]=useState([])
     const [imagen, setImagen] = useState(null);
     const [Logueado, setLogueado] = useState(false)
     const [reservacionData, setReservacionData] = useState([])
     let Hora = new Array([]);
 
-    const SplitHora = () =>{
+/*     const SplitHora = () =>{
         Hora = (dato && dato.schedule.split(","))
         console.log(Hora)
-    }
+    } */
 
 
     useEffect(()=>{
@@ -59,12 +65,14 @@ function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
         .catch((error) => {
                 console.error('Error:', error);
         });
+        
+        
        
     }, [1])
 
     const login = ()  =>{
+        console.log(idUser);
         if(idUser==undefined){
-      
             alert("Aun no estas logueado :(")
         }else{
             setModal(true)
@@ -74,31 +82,67 @@ function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
     const [modal, setModal] = useState(false)
 
     useEffect(()=>{
-        //cmabar el id y el reseña como esta en la base de datos
-        /*fetch(`http://localhost:8080/reseña/${id}`, {
-      method: "GET", headers: {
-          Accept: "aplication/json",
-          "Content-Type": "Aplication/json"
-      }, mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-      },
+        fetch(`http://localhost:8080/comment/restaurant/${id}/comments`, {
+        method: "GET", headers: {
+            Accept: "aplication/json",
+            "Content-Type": "Aplication/json"
+        }, mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
 
-  })
-     .then((response) => {return response.json()})
-     .then((respuesta => setRating(respuesta.data)))
-     .catch((error)=>{
-        console.error('Error: ', error);
-     });*/
+        })
+        .then((response) => {return response.json()})
+        .then((respuesta => setComment(respuesta.data)))
+        .catch((error)=>{
+            console.error('Error: ', error);
+        });
     })
     
     const [rating,setRating] = useState(null);
     const [hover, setHover] = useState(null);
 
-   
+
+    function subir () {
+        let comment = document.getElementById("commentInput").value;
+        console.log(idUser);
+        fetch(`http://localhost:8080/comment/user/${idUser}/restaurant/${id}`,{
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                date:"1",
+                content:comment,
+                score:4
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {console.log(data), document.getElementById("commentInput").innerHTML=""})
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+    }
+/*
+handleSumit = e => {
+    e.preventDefault()
+    let {error,...sinErros} = this.state
+    let result = validate(sinErros)
+    
+    this.setState ({erros:result})
+    if(!Object.keys(result).length){
+        console.log("formulario valido")
+        e.target.reset()
+    }
+}*/
+  
     return ( 
         <>
         { 
@@ -124,10 +168,10 @@ function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
                         <p>{dato && dato.zone.name}</p>
                     </div>
                     <div className='Horario'>
-                        {
+                        {/* {
                             dato &&
                             SplitHora()
-                        }
+                        } */}
                         <p><b>Horario:</b></p>
                         <p className='dias'>Lunes:</p>
                         <p>{Hora[0]}</p>
@@ -176,13 +220,13 @@ function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
                     </div>*/}
                         <div className='resena'>
                             <p>Comentarios:</p>
-                            <input type="text"></input>
+                            <input type="text" id="commentInput" ></input>
                              <p>Reseña: </p>                    
                     {[...Array(5)].map((star, i)=>{
                       const ratingValue = i +1;
                      return(
                       
-                       <label>
+                    <label>
 
                         <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)}
                         />
@@ -195,13 +239,29 @@ function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
         
                </div> 
                <div className='pu'>
-                <button className='public'>Publicar</button> 
+                
+                <button  className='public' onClick={()=>subir()} >Publicar</button> 
+                
                </div>
 
                <div className='com'>
-                <h4>COMENTARIOS</h4>
-                
-                <input type="text"  disabled = "disabled" />
+                    <h4>COMENTARIOS:</h4>
+                    {comment.map((comentario) => (
+                        <div>
+                            <div>
+                                <p>Usuario:</p>
+                                <p>{comentario.user.name}</p>
+                            </div>
+                            <div>
+                                <p>Comentario:</p>
+                                <p>{comentario.content}</p>
+                            </div>
+                            <div>
+                                <p>Estrellas:</p>
+                                <p>Lo que no hizo Abril</p>
+                            </div>
+                        </div>
+                    ))}
                </div>
                
             </div>

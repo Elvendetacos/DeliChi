@@ -22,17 +22,52 @@ function RestauranrEdit() {
   const [menuEdit, setMenuEdit] = useState();
   const [mesa, setMesa] = useState();
   const [person, setPerson] = useState();
+  const [openModal, setOpenModal] = useState();
 
   return (
     <>
-      {estabModal && <ModalEstablecimiento numberTable={numberTable} capacityTable={capacityTable}  setMesa={setMesa} setPerson={setPerson} mesa={mesa} person={person} setEstabModal={setEstabModal} setNumberTable={setNumberTable} setCapacityTable={setCapacityTable}/>}
-      {horarioModal && <ModalHorario horaioG={horaioG} setHorarioModal={setHorarioModal} setHora={setHora} hora={hora}/>}
+      {openModal && (
+        <ModalEdit
+          reservacion={reservacion}
+          open={openModal}
+          setOpenModal={setOpenModal}
+        />
+      )}
+      {estabModal && (
+        <ModalEstablecimiento
+          numberTable={numberTable}
+          capacityTable={capacityTable}
+          setMesa={setMesa}
+          setPerson={setPerson}
+          mesa={mesa}
+          person={person}
+          setEstabModal={setEstabModal}
+          setNumberTable={setNumberTable}
+          setCapacityTable={setCapacityTable}
+        />
+      )}
+      {horarioModal && (
+        <ModalHorario
+          horaioG={horaioG}
+          setHorarioModal={setHorarioModal}
+          setHora={setHora}
+          hora={hora}
+        />
+      )}
       {menuModal && (
-        <ModalMenu setMenuEdit={setMenuEdit} menuEdit={menuEdit} menuModal={menuModal} setMenuModal={setMenuModal} menu={menu} setMenu={setMenu}/>
+        <ModalMenu
+          setMenuEdit={setMenuEdit}
+          menuEdit={menuEdit}
+          menuModal={menuModal}
+          setMenuModal={setMenuModal}
+          menu={menu}
+          setMenu={setMenu}
+        />
       )}
       <Header search={search} text={text} />
       <Layout>
         <FromEdit
+          setOpenModal={setOpenModal}
           setHorarioG={setHorarioG}
           setHorarioModal={setHorarioModal}
           setMenuModal={setMenuModal}

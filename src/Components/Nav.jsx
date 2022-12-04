@@ -1,6 +1,8 @@
 import '../assets/Styles/Nav.css'
 
-function Nav({setRegister, setLogin, setReservacion}) {
+
+function Nav({setRegister, setLogin, setReservacion,}) {
+ 
     return (
       <nav>
         <div className="reser">

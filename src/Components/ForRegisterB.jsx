@@ -33,7 +33,7 @@ function ForRegisterB({estado, cambiarEstado}) {
   .then(() => Swal.fire({
     position: 'top',
     icon: 'success',
-    title: 'CEO Registrado',
+    title: 'Registrado correctamente',
     showConfirmButton: false,
     timer: 1500
   }))
