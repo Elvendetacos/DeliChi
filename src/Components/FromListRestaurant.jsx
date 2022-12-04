@@ -31,7 +31,7 @@ function FromListRegister({setEditar, setIdRestaurant}) {
       .then((response) => {
         return response.json();
       })
-      .then((respuesta) => setState(respuesta.data))
+      .then((respuesta) => {setState(respuesta.data)})
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -60,9 +60,9 @@ function FromListRegister({setEditar, setIdRestaurant}) {
           <div className="cards-restaurants">
           {state.map((item) => (
                 <div className="cardR" onClick={()=>editRestaurant(item.id)}>
-                  <img src={item.image[2].fileUrl} alt="" />
+                  <img src={item.image[0].fileUrl} alt="" />
                   <p>{item.name}</p>
-                  <p>{item.zone}</p>
+                  <p>{item.nameZone}</p>
                 </div>
               ))}
             <div className="add-restaurant" onClick={newRestaurant}>

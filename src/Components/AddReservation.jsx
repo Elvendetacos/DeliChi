@@ -30,7 +30,7 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        date:dataValue,
+        date: dataValue,
         people:formData.get("people"),
         hour:hora.current.value
         }),
