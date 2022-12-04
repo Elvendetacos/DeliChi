@@ -93,7 +93,7 @@ function FromEdit({
       .catch((error) => {
         console.error("Error:", error);
       });
-  };
+      };
 
   const changeHandler = (e) => {
     const file = e.target.files[0];

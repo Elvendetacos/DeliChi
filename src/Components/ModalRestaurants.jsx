@@ -119,7 +119,7 @@ function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
             body: JSON.stringify({
                 date:"1",
                 content:comment,
-                score:4
+                score:rating
             }),
         })
         .then((response) => response.json())
@@ -244,7 +244,7 @@ handleSumit = e => {
                             </div>
                             <div>
                                 <p>Estrellas:</p>
-                                <p>Lo que no hizo Abril</p>
+                                <p>{comentario.score}</p>
                             </div>
                         </div>
                     ))}
