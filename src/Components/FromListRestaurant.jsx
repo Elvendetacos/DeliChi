@@ -60,7 +60,7 @@ function FromListRegister({setEditar, setIdRestaurant}) {
           <div className="cards-restaurants">
           {state.map((item) => (
                 <div className="cardR" onClick={()=>editRestaurant(item.id)}>
-                  <img src={Rafa} alt="" />
+                  <img src={item.image[2].fileUrl} alt="" />
                   <p>{item.name}</p>
                   <p>{item.zone}</p>
                 </div>

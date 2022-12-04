@@ -21,10 +21,9 @@ function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
     const [reservacionData, setReservacionData] = useState([])
     let Hora = new Array([]);
 
-/*     const SplitHora = () =>{
+    const SplitHora = () =>{
         Hora = (dato && dato.schedule.split(","))
-        console.log(Hora)
-    } */
+    } 
 
 
     useEffect(()=>{
@@ -168,10 +167,10 @@ handleSumit = e => {
                         <p>{dato && dato.zone.name}</p>
                     </div>
                     <div className='Horario'>
-                        {/* {
+                        {
                             dato &&
                             SplitHora()
-                        } */}
+                        } 
                         <p><b>Horario:</b></p>
                         <p className='dias'>Lunes:</p>
                         <p>{Hora[0]}</p>

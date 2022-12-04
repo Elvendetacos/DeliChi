@@ -16,7 +16,10 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
       event.preventDefault();
       const formData = new FormData(form.current);
   
-    if(reser ===undefined){
+    if(reser === undefined){
+      console.log(hora.current.value);
+      console.log(dataValue);
+      console.log(formData.get("people"));
       fetch(`http://localhost:8080/reservation/user/${idUser}/restaurant/${idRestaurant}`, {
       method: "POST",
       mode: "cors",
