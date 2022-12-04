@@ -43,9 +43,11 @@ function FromEdit({
   const [fileDataURL, setFileDataURL] = useState(null);
   const [banner, setBanner] = useState(null);
   const [fileBannerURL, setFileBannerURL] = useState(null);
-  const [filesUrl, setFilesUrl] = useState([])
+
   const [imageFiles, setImageFiles] = useState([]);
   const [images, setImages] = useState([]);
+  const [image, setImage] = useState([]);
+  
   const [zone, setZone] = useState([]);
   const [zoneEdit, setZoneEdit] = useState();
   const form = useRef(null);
@@ -92,15 +94,13 @@ function FromEdit({
         setZoneEdit(respuesta.data.zone.id),  
         setFileDataURL(respuesta.data.images[1].fileUrl),
         setFileBannerURL(respuesta.data.images[0].fileUrl)
-        setFilesUrl(
-          results = respuesta.data.images.filter(function (type) { return type.imageType == 'images' })
+        setImage(
+          respuesta.data.images.filter(function (type) { return type.imageType == 'images' })
         )
-        console.log(filesUrl)
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-
     };
 
   const changeHandler = (e) => {
@@ -168,6 +168,7 @@ function FromEdit({
   const resourcesView = () => {
     const fileReaders = [];
     let isCancel = false;
+
     if (imageFiles.length) {
       const promises = imageFiles.map((file) => {
         return new Promise((resolve, reject) => {
@@ -501,7 +502,6 @@ function FromEdit({
                 <div className="data-image-1-1">
                   <div className="profile-edit">
                     <p className="title-profile">Agregar imagen de perfil: </p>
-
                     <div className="view-image-1">
                       <img src={fileDataURL} alt="" className="profile" />
                       <label className="addprofile" htmlFor="profile">
@@ -544,9 +544,16 @@ function FromEdit({
                     <p>Agrege imagenes de referencia: </p>
                     <div className="view-references">
                       <div className="conteiner-references">
-                        {images.map((image, idx) => (
-                          <CardImage key={idx} resources={image} />
-                        ))}
+                        {
+                          image && image.map((img) => ( 
+                            <CardImage key={img.id} resources={img.fileUrl}/>
+                          ))
+                        }
+                        {
+                          images && images.map((image, idx) => (
+                            <CardImage key={idx} resources={image}/>
+                          )) 
+                        }
                       </div>
                       <label className="addreferences" htmlFor="references">
                         <img src={AddImage} alt="" />
