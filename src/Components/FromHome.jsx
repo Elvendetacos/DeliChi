@@ -24,17 +24,16 @@ function FromHome({ setRestaurant , setId}) {
   const [zoneName, setZoneName] = useState([])
 
   useEffect(()=>{
-    fetch(`http://localhost:8080/zone/1/restaurants/`, {
-      method: "GET",
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-      },
-
-  })
+      fetch(`http://localhost:8080/zone/1/restaurants/`, {
+        method: "GET",
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+      })
       .then((response) => {return response.json()})
       .then((respuesta => {setZone(respuesta.data), console.log(respuesta.data)}))
       .catch((error) => {

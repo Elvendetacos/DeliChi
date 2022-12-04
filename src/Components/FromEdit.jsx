@@ -43,6 +43,7 @@ function FromEdit({
   const [fileDataURL, setFileDataURL] = useState(null);
   const [banner, setBanner] = useState(null);
   const [fileBannerURL, setFileBannerURL] = useState(null);
+  const [filesUrl, setFilesUrl] = useState([])
   const [imageFiles, setImageFiles] = useState([]);
   const [images, setImages] = useState([]);
   const [zone, setZone] = useState([]);
@@ -66,7 +67,7 @@ function FromEdit({
     }
   };
 
-  const loadData = () => {
+  const loadData =  () => {
     fetch(`http://localhost:8080/restaurant/${idRestaurant}`, {
       method: "GET",
       headers: {
@@ -87,59 +88,20 @@ function FromEdit({
       .then((respuesta) => {
         console.log(respuesta.data);
         setRestaurantData(respuesta.data),
-          setReservacion(respuesta.data.reservations),
-          setZoneEdit(respuesta.data.zone.id);
+        setReservacion(respuesta.data.reservations),
+        setZoneEdit(respuesta.data.zone.id),  
+        setFileDataURL(respuesta.data.images[1].fileUrl),
+        setFileBannerURL(respuesta.data.images[0].fileUrl)
+        setFilesUrl(
+          results = respuesta.data.images.filter(function (type) { return type.imageType == 'images' })
+        )
+        console.log(filesUrl)
       })
       .catch((error) => {
         console.error("Error:", error);
       });
 
-      
-    /* fetch(`http://localhost:8080/image/getLogo/${idRestaurant}`, {
-      method: "GET",
-      headers: {
-        Accept: "aplication/json",
-        "Content-Type": "Aplication/json",
-      },
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((respuesta) => setZone(respuesta.data))
-      .catch((error) => {
-        console.error("Error:", error);
-      }); */
-
-      /* fetch(`http://localhost:8080/image/getBanner/${idRestaurant}`, {
-      method: "GET",
-      headers: {
-        Accept: "aplication/json",
-        "Content-Type": "Aplication/json",
-      },
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((respuesta) => setZone(respuesta.data))
-      .catch((error) => {
-        console.error("Error:", error);
-      }); */
-
-      };
+    };
 
   const changeHandler = (e) => {
     const file = e.target.files[0];
