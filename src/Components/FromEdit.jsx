@@ -117,9 +117,28 @@ function FromEdit({
         console.error("Error:", error);
       }); */
 
+      /* fetch(`http://localhost:8080/image/getBanner/${idRestaurant}`, {
+      method: "GET",
+      headers: {
+        Accept: "aplication/json",
+        "Content-Type": "Aplication/json",
+      },
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((respuesta) => setZone(respuesta.data))
+      .catch((error) => {
+        console.error("Error:", error);
+      }); */
 
-
-      
       };
 
   const changeHandler = (e) => {
