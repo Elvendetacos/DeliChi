@@ -1,5 +1,4 @@
 import '../assets/Styles/ModalRestaurants.css'
-import '../assets/Styles/Star.css'
 import Rafa from '../assets/Img/banner-placeholder.jpg'
 import Cancel from '../assets/Img/cancel.svg'
 import AddReservation from './AddReservation';
@@ -205,37 +204,25 @@ handleSumit = e => {
                 <div className='Reservations-button'>
                     <button onClick={()=>login()}>Añadir Reservación</button>
                 </div>
-                {/*<div className='reservacionC'>
-                    <p><b>Reservación:</b></p>
-                    <br></br>
-                    <p>Cantidad de personas:</p>
-                    <p>{}</p>
-                    <p>Fecha:</p>
-                    <p>{}</p>
-                    <p>Hora:</p>
-                    <p>{}</p>
-                    <button>Cancelar</button>
-                    <button>Editar</button>
-                    </div>*/}
                         <div className='resena'>
                             <p>Comentarios:</p>
                             <input type="text" id="commentInput" ></input>
-                             <p>Reseña: </p>                    
-                    {[...Array(5)].map((star, i)=>{
-                      const ratingValue = i +1;
-                     return(
-                      
-                    <label>
+                             <p>Reseña: </p> 
+                             <div>
+                             {[...Array(5)].map((star, i)=>{
+                              const ratingValue = i +1;
 
-                        <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)}
-                        />
-                        <FaStar className='star' color={ratingValue  <= (rating || hover) ? "#FFFF00" : "FFFFF"} 
-                        size={30}  onMouseLeave={()=> setHover(null)} 
-                        />
-                     </label>
+                             return(
+                               <label>
+                                 <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)}/>
+                                <FaStar className='star' color={ratingValue <= (hover || rating) ? "#FCE40A" : "#ffff"} 
+                                 size={30} onClick={() => setHover(ratingValue)} onMouseLeave={()=> setHover(null)}
+                                />
+                                </label>
                 );
             })}
-        
+            
+        </div>
                </div> 
                <div className='pu'>
                 
