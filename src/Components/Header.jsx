@@ -4,11 +4,13 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import RestaurantFoundContext from "../Contextos/ContextoRestaurantFound";
+import { useContext } from "react";
 
 function Header({ search, text }) {
   const navigate = useNavigate();
   const [restaurantResult, setRestaurantResult] = useState([]);
-  let restaurantFound = useRef([]);
+  const {restaurantFound, setRestaurantFound} = useContext(RestaurantFoundContext);
 
   const redireccion = () => {
     navigate("/Register");
@@ -40,21 +42,15 @@ function Header({ search, text }) {
       });
   }, []);
 
+ 
   const handleChange = (e) => {
+    let arreglo = [];
     restaurantResult.forEach((rest) => {
       rest.name.toLowerCase().includes(e.target.value.toLowerCase())
-        ? console.log(rest.name)
-        : console.log("_______");
+        ? arreglo.push(rest)
+        : console.log("");
     });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault;
-    restaurante = restaurantFound.current.values;
-    // Mostrar card con los datos
-
-    // Primer detalle que al agreagar una etiqueta form que englobe al input, se modifica el tamaño
-    // horizontal del input (elementos comentados)
+    setRestaurantFound(arreglo)
   };
 
   return (
@@ -65,15 +61,14 @@ function Header({ search, text }) {
         </div>
         <div className="conteiner-Search">
           {search && (
-            //<form onSubmit={handleSubmit}>
+            
               <input
                 type="text"
                 name=""
-                ref={restaurantFound}
                 onChange={handleChange}
                 id=""
               />
-            //</form>
+            
           )}
         </div>
         <div className="conteiner-Name">

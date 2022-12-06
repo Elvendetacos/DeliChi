@@ -40,7 +40,7 @@ function Home() {
                 <ModalRestaurants setReservacion={setReservacion} setRestaurant={setRestaurant} id={id} idUser={idUser}/>
         }
         
-        <Header search={search} text={text}/>
+        <Header text={text}/>
         <Nav setReservacion={setReservacion} setRegister={setRegister} setLogin={setLogin}/>
         <Layout>
             <FromHome setRestaurant={setRestaurant} setId={setId}/>

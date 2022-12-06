@@ -7,7 +7,7 @@ import {FaStar} from 'react-icons/fa'
 import { validate } from 'uuid';
 import {handleSumit} from 'react'
 import { useForm } from "react-hook-form";
-
+import "../assets/Styles/tablesComent.css";
 function ModalRestaurants({setRestaurant, id, idUser ,idRestaurant}) {
 
     const { handleSubmit } = useForm();
@@ -224,38 +224,39 @@ handleSumit = e => {
             
         </div>
                </div> 
-               <div className='pu'>
-                
-                <button  className='public' onClick={()=>subir()} >Publicar</button> 
-                
-               </div>
+               <div className="pu">
+            <button className="public" onClick={() => subir()}>
+              Publicar
+            </button>
+          </div>
 
-               <div className='com'>
-                    <h4>COMENTARIOS:</h4>
-                    {comment.map((comentario) => (
-                        <div>
-                            <div>
-                                <p>Usuario:</p>
-                                <p>{comentario.user.name}</p>
-                            </div>
-                            <div>
-                                <p>Comentario:</p>
-                                <p>{comentario.content}</p>
-                            </div>
-                            <div>
-                                <p>Estrellas:</p>
-                                <p>{comentario.score}</p>
-                            </div>
-                        </div>
-                    ))}
-               </div>
-               
+          <div className="com">
+            <h4>COMENTARIOS:</h4>
+            <div className="container">
+              <table className="table1">
+                <thead>
+                  <tr>
+                    <th className="jiji">Usuario : </th>
+                    <th className="jiji">Comentarios : </th>
+                    <th className="jiji"> Puntuacion : </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comment.map((comentario) => (
+                    <tr>
+                      <td>{comentario.user.name}</td>
+                      <td>{comentario.content}</td>
+                      <td>{comentario.score}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-        </>
-     );
-        
-        
+      </div>
+    </>
+  );
 }
 
 export default ModalRestaurants;

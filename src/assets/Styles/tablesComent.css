@@ -1,0 +1,51 @@
+.com{
+    
+    align-items: center;
+    justify-content: center;
+    min-height: 10vh;
+    
+}
+.container{
+    border: solid 1px rgba(255, 255, 255, 0.2);
+    
+}
+
+.table1{
+    color: white;
+    font-size: 15px;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-bottom: 20px;
+}
+
+.table1 thead{
+    background : grey;
+}
+
+.table1 th{
+    padding: 20px 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.table1 td{
+width: 100%;
+border-bottom: solid 0.5px rgba(255, 255, 255, 0.2);
+
+}
+
+.table1 tbody tr{
+    height: 50px;
+    cursor: pointer;
+}
+
+
+.table1 tbody tr:hover{
+    color: black;
+    background: rgba(223, 255, 81, 0.888);
+}
+
+.jiji{
+    padding: 50px;
+}

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Contexto from "../Contextos/ContextoCeo";
 import Rafa from "../assets/Img/rafa.jpg";
 
-function RestaurantSearch({setRestaurant, setId }) {
+function RestaurantSearch({setRestaurant, setId, restaurantFound}) {
   const [state, setState] = useState([]);
   const [zone, setZone] = useState([]);
   const zoneSelect = useRef(null) 
@@ -65,6 +65,12 @@ function RestaurantSearch({setRestaurant, setId }) {
     setId(id)
     setRestaurant(true)
   }
+
+
+  useEffect(()=>{
+    setState(restaurantFound)
+  },[restaurantFound])
+
   useEffect(() => {
     RestaurantList();
     zonesData();
@@ -92,7 +98,7 @@ function RestaurantSearch({setRestaurant, setId }) {
 
   return (
     <>
-      <div class="container-filter">
+      <div className="container-filter">
         <p>Buscar por zona: </p>
         <select className="input-8" name="zona" ref={zoneSelect}>
           <option value="default">-Seleccione su zona-</option>

@@ -9,7 +9,7 @@ function Nav({setRegister, setLogin, setReservacion,}) {
           <p onClick={() => setReservacion(true)}> View</p>
         </div>
         <div className="ingresar">
-          <p onClick={()=>setRegister(true)}>Ingresar</p>
+          <p onClick={()=>setRegister(true)}>Registrate</p>
         </div>
         <div className="iniciarSesion">
           <p onClick={()=>setLogin(true)}>Iniciar Sesión</p>
