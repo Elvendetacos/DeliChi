@@ -10,7 +10,7 @@ function ForRegisterB({estado, cambiarEstado}) {
     event.preventDefault();
     const formData = new FormData(form.current);
 
-  fetch("http://localhost:8080/ceo", {
+  fetch(`http://localhost:8080/ceo`, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -29,18 +29,34 @@ function ForRegisterB({estado, cambiarEstado}) {
         }),
   })
   .then((response) => response.json())
-  .then((data) => console.log(data))
-  .then(() => Swal.fire({
-    position: 'top',
-    icon: 'success',
-    title: 'Registrado correctamente',
-    showConfirmButton: false,
-    timer: 1500
-  }))
+  .then((data) => {console.log(data),validateResponse(data.success), 
+    form.current.reset()})
   .catch((error) => {
     console.error("Error:", error);
   });
 
+  form.current.reset();
+
+};
+
+function validateResponse(succes){
+if(succes){
+  Swal.fire({
+    position: "top",
+    icon: "success",
+    title: "Registrado correctamente",
+    showConfirmButton: false,
+    timer: 1500,
+  })
+}
+Swal.fire({
+  position: "top",
+  icon: "error",
+  title: "CEO no registrado",
+  text: "Datos erroneos",
+  showConfirmButton: false,
+  timer: 1500,
+})
 }
   
   return (

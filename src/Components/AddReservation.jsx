@@ -1,11 +1,13 @@
 import "../assets/Styles/AddReservation.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import Swal from "sweetalert2";
+import ContextoTokenCeo from "../Contextos/ContextoTokenCeo";
 
 function AddReservation({setModal, idUser, idRestaurant, reser}) {
     var today = new Date();
     const [state, setState] = useState()
     const [dataValue, setDataValue] = useState()
+    const { tokenCeo } = useContext(ContextoTokenCeo)
     const hora = useRef(null)
     const form = useRef(null)
     const date = useRef(null)
@@ -20,12 +22,13 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
       console.log(hora.current.value);
       console.log(dataValue);
       console.log(formData.get("people"));
-      fetch(`http://localhost:8080/reservation/user/${idUser}/restaurant/${idRestaurant}`, {
+      fetch(`http://localhost:8080/reservation/user/${idUser.id}/restaurant/${idRestaurant}`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
       headers: {
+        'Authorization': tokenCeo,
         Accept: "application/json",
         "Content-Type": "application/json",
       },
@@ -55,6 +58,7 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
       cache: "no-cache",
       credentials: "same-origin",
       headers: {
+        'Authorization': tokenCeo,
         Accept: "application/json",
         "Content-Type": "application/json",
       },

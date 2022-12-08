@@ -77,7 +77,7 @@ function RestaurantSearch({setRestaurant, setId, restaurantFound}) {
   }, []);
 
   const searchByZone = () => {
-    fetch(`http://localhost:8080/zone/${zoneSelect.current.value}/restaurants/`, {
+    fetch(`http://localhost:8080/zone/${zoneSelect.current.value}/restaurants`, {
       method: "GET",
       mode: "cors",
       cache: "no-cache",
@@ -111,13 +111,20 @@ function RestaurantSearch({setRestaurant, setId, restaurantFound}) {
       <div className="conteiner-list">
         <div className="list-restaurants">
           <div className="cards-restaurants">
-            {state.map((item) => (
-              <div className="cardR" onClick={() => openRestaurant(item.id)}>
-                <img src={Rafa} alt="" />
-                <p>{item.name}</p>
-                <p>{item.zone}</p>
+          {state.map((restaurante) => (
+            <div
+              className="card-restaurant"
+             onClick={() => openRestaurant(restaurante.id)}
+            >
+              <div className="img-restaurant">
+                <img src={restaurante.image[1].fileUrl} alt="" />
               </div>
-            ))}
+              <div className="name-restaurant">
+                <p>{restaurante.name}</p>
+              </div>
+              <div className="ranked-restaurant"></div>
+            </div>
+          ))}
           </div>
         </div>
       </div>

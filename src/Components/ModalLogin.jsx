@@ -1,40 +1,44 @@
 import Modal from "../Conteiners/Modal";
 import "../assets/Styles/ModalLogin.css";
 import Cancel from "../assets/Img/cancel.svg";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2'
+import ContextoTokenCeo from "../Contextos/ContextoTokenCeo";
 
 
-function ModalLogin({setLogin, setIdUser}) {
+function ModalLogin({setRegisters, setInicio, setView, setCerrar, setLogin, setIdUser, setUsuarios, setText}) {
 
   const password = useRef(null);
   const email = useRef(null);
+  const { setTokenCeo } = useContext(ContextoTokenCeo)
 
     const handleSubmit = (event) => {
       event.preventDefault();
       const correo = (email.current.value);
       const contrasena=(password.current.value);
 
-      fetch(`http://localhost:8080/user/${correo}`, {
-          method: "GET", headers: {
-              Accept: "aplication/json",
-              "Content-Type": "Aplication/json"
-          }, mode: 'cors',
+      fetch(`http://localhost:8080/user/login`, {
+          method: "POST", 
+          mode: 'cors',
           cache: 'no-cache',
           credentials: 'same-origin',
           headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
           },
+          body:JSON.stringify({
+            email: correo,
+            password: contrasena
+          }),
       })
           .then((response) => {return response.json()})
           .then((respuesta =>{
-              const apiId=(respuesta.data.id);
-              const apiPassword=(respuesta.data.password);
-              const apiName=(respuesta.data.name);
-              console.log(respuesta.data)
-              validacion(contrasena, apiId ,apiPassword, apiName)
+              const info=(respuesta.data);
+              const success=(respuesta.success);
+              console.log(respuesta.data.token)
+              setTokenCeo(respuesta.data.token);
+              validacion(contrasena, info ,success)
           }))
           .catch((error) => {
               console.error('Error:', error);
@@ -42,19 +46,25 @@ function ModalLogin({setLogin, setIdUser}) {
           setLogin(false)
   }
 
-  function validacion(passwordLogin, api1, apiPassword, apiName) {
-      if (apiPassword == passwordLogin) {
-          setIdUser(api1)
+  function validacion(passwordLogin, info, success) {
+      if (success) {
+          setIdUser(info)
           console.log(passwordLogin)
+          setUsuarios(true)
+          setText(false)
+          setRegisters(false)
+          setInicio(false)
+          setView(true)
+          setCerrar(true)
           Swal.fire({
             position: "top",
-            title: 'Bienvenido ' + apiName + ' :D',
+            title: 'Bienvenido ' + info.name + ' :D',
             showConfirmButton: false,
             timer: 1500
           })
-      } else if (apiPassword != passwordLogin) {
+      } else {
           console.log(passwordLogin)
-          alert("Contraseña no valida")
+          alert("No Registrado")
       }
   }
 

@@ -94,9 +94,32 @@
 .buscar{
   width: 80px;
     height: 20px;
-    background-color: #2ACD53;
-    border: #2ACD53;
     color: black;
+    border: none;
+    background: none;
     border-radius: 8px;
     text-align: center;
+    text-decoration:underline;
+}
+
+.container-filter{
+  width: 30%;
+  margin-left: 35%;
+  height: 10%;
+  margin-top: 20px;
+}
+
+.container-filter p{
+  font-size: 1.3em;
+}
+
+.container-filter select{
+  width: 80%;
+  height: 30px;
+}
+
+.container-filter button{
+  width: 20% ;
+  height: 30px;
+  font-size: 1.3em;
 }

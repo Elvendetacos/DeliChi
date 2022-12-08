@@ -9,6 +9,7 @@ import User from "../Contextos/ContextoUser";
 import ContextoRestaurant from "../Contextos/ContextoRestaurant";
 import ContextoRestaurantFound from "../Contextos/ContextoRestaurantFound";
 import Resta from "../Components/ModalRestaurants";
+import ContextoTokenCeo from "../Contextos/ContextoTokenCeo";
 import { useState } from "react";
 import { Provider } from "react-redux";
 
@@ -17,6 +18,7 @@ function App() {
   const [idUser, setIdUser] = useState();
   const [idRestaurant, setIdRestaurant] = useState();
   const [restaurantFound, setRestaurantFound] = useState([]);
+  const [tokenCeo, setTokenCeo] = useState()
 
   return (
     <BrowserRouter>
@@ -28,6 +30,7 @@ function App() {
             <ContextoRestaurant.Provider
               value={{ idRestaurant, setIdRestaurant }}
             >
+              <ContextoTokenCeo.Provider value={{tokenCeo, setTokenCeo}}>
               <Routes>
                 <Route path="/Restaurants" element={<Restaurants />}></Route>
                 <Route path="/Restaurant" element={<RestaurantEdit />}></Route>
@@ -36,6 +39,7 @@ function App() {
                 <Route path="/Restaurante" element={<Resta />}></Route>
                 <Route path="/" element={<Home />}></Route>
               </Routes>
+              </ContextoTokenCeo.Provider>
             </ContextoRestaurant.Provider>
           </User.Provider>
         </Contexto.Provider>

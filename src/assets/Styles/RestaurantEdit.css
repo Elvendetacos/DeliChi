@@ -381,14 +381,15 @@
 }
 
 .conteiner-options button{
+    cursor: pointer;
     font-size: 1.2em;
     color: white;
     border: none;
     background-color: #252323;
-    width: 40%;
+    width: 50%;
     border-radius: 30px;
-    margin-left: 30%;
-    height: 60%;
+    margin-left: 25%;
+    height: 90%;
 }
 
 .overlay{

@@ -5,6 +5,7 @@ import { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Contexto from "../Contextos/ContextoCeo";
 import Rafa from "../assets/Img/rafa.jpg";
+import ContextoTokenCeo from "../Contextos/ContextoTokenCeo";
 
 function FromListRegister({setEditar, setIdRestaurant}) {
   const [state, setState] = useState([]);
@@ -12,26 +13,26 @@ function FromListRegister({setEditar, setIdRestaurant}) {
   const navigate = useNavigate();
 
   const { id } = useContext(Contexto);
+  const { tokenCeo } = useContext(ContextoTokenCeo)
+  //const token = tokenCeo.replace('Bearer ', '')
 
   const RestaurantList = () => {
-    fetch(`http://localhost:8080/ceo/${id}/restaurants`, {
+    fetch(`http://localhost:8080/ceo/${id}/restaurants/u`, {
       method: "GET",
       headers: {
-        Accept: "aplication/json",
-        "Content-Type": "Aplication/json",
+        'Authorization': tokenCeo,
+        Accept: "application/json",
+        "Content-Type": "Application/json",
       },
       mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
     })
       .then((response) => {
         return response.json();
       })
-      .then((respuesta) => {setState(respuesta.data)})
+      .then((respuesta) => {setState(respuesta.data)
+      })
       .catch((error) => {
         console.error("Error:", error);
       });

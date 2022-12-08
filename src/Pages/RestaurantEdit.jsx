@@ -5,6 +5,7 @@ import ModalMenu from "../Components/ModalMenu";
 import { useState } from "react";
 import ModalHorario from "../Components/ModalHorario";
 import ModalEstablecimiento from "../Components/ModalEstablecimiento";
+import ModalEdit from "../Components/ModalEdit";
 import { useEffect } from "react";
 
 function RestauranrEdit() {
@@ -23,6 +24,7 @@ function RestauranrEdit() {
   const [mesa, setMesa] = useState();
   const [person, setPerson] = useState();
   const [openModal, setOpenModal] = useState();
+  const [reservacion, setReservacion] = useState([]);
 
   return (
     <>
@@ -31,6 +33,7 @@ function RestauranrEdit() {
           reservacion={reservacion}
           open={openModal}
           setOpenModal={setOpenModal}
+          
         />
       )}
       {estabModal && (
@@ -79,6 +82,7 @@ function RestauranrEdit() {
           hora={hora}
           numberTable={numberTable}
           capacityTable={capacityTable}
+          setReservacion={setReservacion}
         />
       </Layout>
     </>

@@ -10,6 +10,7 @@ import ModalEdit from "./ModalEdit";
 const imageType = /image\/(png|jpg|jpeg|svg)/i;
 const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
 import Swal from "sweetalert2";
+import ContextoTokenCeo from "../Contextos/ContextoTokenCeo";
 
 function FromEdit({
   setMesa,
@@ -23,12 +24,14 @@ function FromEdit({
   hora,
   numberTable,
   capacityTable,
-  setOpenModal
+  setOpenModal,
+  setReservacion
 }) {
   const [restaurantData, setRestaurantData] = useState({});
 /*   const [idNewRestaurant, setIdNewRestaurant] = useState(); */
   var time;
   const { idRestaurant, setIdRestaurant } = useContext(ContextoRestaurant);
+  const { tokenCeo } = useContext(ContextoTokenCeo)
   const a = useNavigate();
   const profile1 = useRef(null);
 
@@ -53,7 +56,8 @@ function FromEdit({
   const form = useRef(null);
   const tipoComida = useRef(null);
   const tipoZona = useRef(null);
-  const [reservacion, setReservacion] = useState([]);
+  const [reservations, setReservations] = useState([]);
+  const [guardar, setGuardar] = useState(false)
 
   const handleChange = (event) => {
     if (event.target.name === "zona") {
@@ -73,16 +77,12 @@ function FromEdit({
     fetch(`http://localhost:8080/restaurant/${idRestaurant}`, {
       method: "GET",
       headers: {
-        Accept: "aplication/json",
-        "Content-Type": "Aplication/json",
+        Accept: "application/json",
+        "Content-Type": "Application/json",
       },
       mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
     })
       .then((response) => {
         return response.json();
@@ -91,6 +91,7 @@ function FromEdit({
         console.log(respuesta.data);
         setRestaurantData(respuesta.data),
         setReservacion(respuesta.data.reservations),
+        setReservations(respuesta.data.reservations),
         setZoneEdit(respuesta.data.zone.id),  
         setFileDataURL(respuesta.data.images[1].fileUrl),
         setFileBannerURL(respuesta.data.images[0].fileUrl)
@@ -205,16 +206,12 @@ function FromEdit({
     fetch(`http://localhost:8080/zone/zones`, {
       method: "GET",
       headers: {
-        Accept: "aplication/json",
-        "Content-Type": "Aplication/json",
+        Accept: "application/json",
+        "Content-Type": "Application/json",
       },
       mode: "cors",
       cache: "no-cache",
       credentials: "same-origin",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
     })
       .then((response) => {
         return response.json();
@@ -227,8 +224,10 @@ function FromEdit({
 
   useEffect(() => {
     if (idRestaurant != undefined) {
+      setGuardar(true)
       loadData();
     }
+    //zonesData();
   }, []);
 
   useEffect(() => {
@@ -259,7 +258,7 @@ function FromEdit({
   // Upload images
   const uploadLogoImage = async (methodType, idNewRestaurant) => {
     console.log(
-      "El id del ceo es: " + id + ", el id del restaurante es: " + idNewRestaurant
+      "El id del ceo es: " + id + ", el id del restaurante es: " + idNewRestaurant + " token " + tokenCeo
     );
     const restaurantLogo = document.getElementById("profile").files[0];
     let formData = new FormData();
@@ -267,14 +266,14 @@ function FromEdit({
 
     const path = idRestaurant == undefined ? "logo" : "updateLogo";
 
-    await fetch(
-      `http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/${path}`,
-      {
+    await fetch(`http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/${path}`,{
         method: methodType,
         mode: "cors",
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
+          'Authorization': tokenCeo,
+          //"Content-Type": "application/json",
           Accept: "application/json",
         },
         body: formData,
@@ -289,7 +288,7 @@ function FromEdit({
 
   const uploadBannerImage = async (idNewRestaurant) => {
     console.log(
-      "El id del ceo es: " + id + ", el id del restaurante es: " + idNewRestaurant
+      "El id del ceo es: " + id + ", el id del restaurante es: " + idNewRestaurant + "token" + tokenCeo
     );
     const restaurantBanner = document.getElementById("banner").files[0];
     let formData = new FormData();
@@ -298,14 +297,14 @@ function FromEdit({
     const path = idRestaurant == undefined ? "banner" : "updateBanner";
     let methodType = idRestaurant == undefined ? "POST" : "PUT"
 
-    await fetch(
-      `http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/${path}`,
-      {
+    await fetch(`http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/${path}`,{
         method: methodType,
         mode: "cors",
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
+          'Authorization': tokenCeo,
+          //"Content-Type": "application/json",
           Accept: "application/json",
         },
         body: formData,
@@ -336,14 +335,14 @@ function FromEdit({
     let formData = new FormData();
     formData.append("file", file);
 
-      await fetch(
-      `http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/image`,
-      {
+      await fetch(`http://localhost:8080/image/ceo/${id}/restaurant/${idNewRestaurant}/image`,{
         method: "POST",
         mode: "cors",
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
+          'Authorization': tokenCeo,
+          //"Content-Type": "application/json",
           Accept: "application/json",
         },
         body: formData,
@@ -367,6 +366,7 @@ function FromEdit({
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
+          'Authorization': tokenCeo,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -393,7 +393,10 @@ function FromEdit({
           didOpen: () =>{
             Swal.showLoading()
             uploadBannerImage(respuest.data.id)
-          }
+          }/*,
+          didClose: () =>{
+            a('/list')
+          }*/
         })
       })
       .catch((error) => {
@@ -412,6 +415,7 @@ function FromEdit({
         cache: "no-cache",
         credentials: "same-origin",
         headers: {
+          'Authorization': tokenCeo,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -438,6 +442,9 @@ function FromEdit({
         didOpen: () =>{
           Swal.showLoading()
           uploadBannerImage(idRestaurant)
+        },
+        didClose: () =>{
+          a('/list')
         }
       }))
       .catch((error) => {
@@ -490,6 +497,11 @@ function FromEdit({
     setMesa(mesa);
     setPerson(person);
     setEstabModal(true);
+  };
+
+  const reser = (reservation) => {
+    setOpenModal(true);
+    setReservacion(reservation);
   };
   
   return (
@@ -684,11 +696,13 @@ function FromEdit({
             <button type="button" onClick={() => regresar()}>
               Regresar
             </button>
-            <button type="reset">Editar</button>
+      
             <button type="submit">Guardar Datos</button>
 
             <div>
-              <button type="button" onClick={() => setOpenModal(true)}>Reservaciones</button>
+            {guardar &&
+                  <button type="button" onClick={() => reser(restaurantData && restaurantData.reservations)}>Reservaciones</button> 
+              }
             </div>
           </div>
         </div>

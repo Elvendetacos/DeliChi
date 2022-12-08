@@ -1,18 +1,17 @@
 import '../assets/Styles/Nav.css'
 
 
-function Nav({setRegister, setLogin, setReservacion,}) {
+function Nav({registers, inicio, view, cerra, setRegister, setLogin, setReservacion}) {
  
     return (
       <nav>
-        <div className="reser">
-          <p onClick={() => setReservacion(true)}> View</p>
-        </div>
         <div className="ingresar">
-          <p onClick={()=>setRegister(true)}>Registrate</p>
+          {view && <p onClick={() => setReservacion(true)}> View</p>}
+          {registers && <p onClick={()=>setRegister(true)}>Registrate</p>}
         </div>
         <div className="iniciarSesion">
-          <p onClick={()=>setLogin(true)}>Iniciar Sesión</p>
+          {cerra && <p onClick={()=>(window.location.replace(''))}>Cerrar sesión</p>}
+          {inicio && <p onClick={()=>setLogin(true)}>Iniciar Sesión</p>}
         </div>
       </nav>
     );

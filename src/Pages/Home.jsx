@@ -19,6 +19,11 @@ function Home() {
     const [id, setId] = useState()
     const { idUser, setIdUser } = useContext(User)
     const [reservacion, setReservacion] = useState(false)
+    const [usuarios, setUsuarios] = useState(false)
+    const [registers, setRegisters] = useState(true)
+    const [inicio, setInicio] = useState(true)
+    const [view, setView] = useState(false)
+    const [cerrar, setCerrar] = useState(false)
 
 
     return ( 
@@ -29,7 +34,7 @@ function Home() {
         }
         {
             login && 
-                <ModalLogin setLogin={setLogin} setIdUser={setIdUser}/>
+                <ModalLogin setRegisters={setRegisters} setInicio={setInicio} setView={setView} setCerrar={setCerrar} setText={setText} setUsuarios={setUsuarios} setLogin={setLogin} setIdUser={setIdUser}/>
         }
         {
             register && 
@@ -40,8 +45,8 @@ function Home() {
                 <ModalRestaurants setReservacion={setReservacion} setRestaurant={setRestaurant} id={id} idUser={idUser}/>
         }
         
-        <Header text={text}/>
-        <Nav setReservacion={setReservacion} setRegister={setRegister} setLogin={setLogin}/>
+        <Header text={text} setText={setText} usuarios={usuarios}/>
+        <Nav registers={registers} inicio={inicio} view={view} cerra={cerrar} setReservacion={setReservacion} setRegister={setRegister} setLogin={setLogin}/>
         <Layout>
             <FromHome setRestaurant={setRestaurant} setId={setId}/>
         </Layout>
