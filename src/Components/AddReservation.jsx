@@ -17,8 +17,8 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
     const handleSubmit = (event) => {
       event.preventDefault();
       const formData = new FormData(form.current);
-  
-    if(reser === undefined){
+  if(dataValue != undefined && formData.get("people") > 0 || formData.get("people") != '' && hora.current.value != ""){
+if(reser === undefined){
       console.log(hora.current.value);
       console.log(dataValue);
       console.log(formData.get("people"));
@@ -29,7 +29,7 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
       credentials: "same-origin",
       headers: {
         'Authorization': tokenCeo,
-        Accept: "application/json",
+        //Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -39,7 +39,7 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
         }),
     })
     .then((response) => response.json())
-    .then((data) => (data))
+    .then((data) => (console.log(data)))
     .then(() => Swal.fire({
       icon: 'success',
       title: 'Reservacion exitosa',
@@ -47,7 +47,14 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
       timer: 1500
     }))
     .catch((error) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Reservacion no exitosa',
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.error("Error:", error);
+
     });
 
     }
@@ -73,9 +80,17 @@ function AddReservation({setModal, idUser, idRestaurant, reser}) {
     .catch((error) => {
       console.error("Error:", error);
     });
-
     }
     setModal(false)
+  }else{
+    Swal.fire({
+      icon: 'warning',
+      title: 'Reservacion no completa',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+    
   
   }
 

@@ -40,7 +40,8 @@ function ForRegisterB({estado, cambiarEstado}) {
 };
 
 function validateResponse(succes){
-if(succes){
+  console.log(succes)
+if(succes==true){
   Swal.fire({
     position: "top",
     icon: "success",
@@ -48,8 +49,8 @@ if(succes){
     showConfirmButton: false,
     timer: 1500,
   })
-}
-Swal.fire({
+}else{
+  Swal.fire({
   position: "top",
   icon: "error",
   title: "CEO no registrado",
@@ -57,6 +58,7 @@ Swal.fire({
   showConfirmButton: false,
   timer: 1500,
 })
+}
 }
   
   return (
