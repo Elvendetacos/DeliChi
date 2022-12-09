@@ -34,8 +34,7 @@ return(
                  <th>Estado </th>
                </tr>
             </thead>
-            <tbody className="table-group-dividier">
-             
+            <tbody className="reservations-item">
                 {reservacion.map((item)=>(
                     <tr>
                         <th>{item.user.name}</th>
@@ -51,7 +50,7 @@ return(
         
         </div>    
         </div>
-        <button onClick={() => setOpenModal(!open)}>aceptar</button>
+        <button className="acept-reservation" onClick={() => setOpenModal(!open)}>Aceptar</button>
       </div>
       </div>
       </div>

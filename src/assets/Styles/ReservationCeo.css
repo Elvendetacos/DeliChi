@@ -2,8 +2,6 @@ h3{
     text-align: center;
 }
 
-
-
 .table{
   border-collapse: collapse;
   width: 100%;
@@ -14,18 +12,21 @@ h3{
   padding: 1px;
 }
 
-.table th:hover{
-  background-color:none;
+.table-group-dividier tr:hover {
+  background-color: #252525;
+  color: #e9e9e9;
+  cursor: pointer;
 }
 
-.table tr:hover {
-    background-color: #252525;
-    color: aqua;
+.reservations-item tr:hover{
+  border-top:1px black solid;
+  border-bottom:1px black solid;
 }
 
 .table thead{
   background-color: #2ACD53;
 }
+
 .table th{
  padding-top: 5px;
   padding-bottom: 5px;
@@ -53,9 +54,20 @@ h3{
   display: flex;
   justify-content: center;
   align-items: stretch;
-  overflow: scroll;
+  overflow-Y: scroll;
   border: 5px solid #e9e9e9;
 
+}
+
+.acept-reservation{
+  width: 20%;
+  margin-left: 40%;
+  height: 30px;
+  border-radius: 30px;
+  border: none;
+  background-color: #2ACD53;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
 

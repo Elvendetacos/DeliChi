@@ -39,22 +39,22 @@ if(reser === undefined){
         }),
     })
     .then((response) => response.json())
-    .then((data) => (console.log(data)))
-    .then(() => Swal.fire({
-      icon: 'success',
-      title: 'Reservacion exitosa',
-      showConfirmButton: false,
-      timer: 1500
-    }))
-    .catch((error) => {
-      Swal.fire({
+    .then((data) => {(console.log(data)),
+      data.data == null ? 
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error en la solicitud',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      :Swal.fire({
         icon: 'success',
-        title: 'Reservacion no exitosa',
+        title: 'Reservacion exitosa',
         showConfirmButton: false,
         timer: 1500
-      })
+      })})
+    .catch((error) => {
       console.error("Error:", error);
-
     });
 
     }
@@ -85,13 +85,11 @@ if(reser === undefined){
   }else{
     Swal.fire({
       icon: 'warning',
-      title: 'Reservacion no completa',
+      title: 'Campos vacios',
       showConfirmButton: false,
       timer: 1500
     })
   }
-    
-  
   }
 
     const handleChange = (event) =>{

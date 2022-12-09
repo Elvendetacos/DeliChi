@@ -77,7 +77,7 @@ function FromHome({ setRestaurant, setId }) {
         return response.json();
       })
       .then((respuesta) => {
-        setZone(respuesta.data), console.log(respuesta.data);
+        setZone(respuesta.data), console.log(respuesta.data), ff(respuesta.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -91,19 +91,22 @@ function FromHome({ setRestaurant, setId }) {
 
     // Fetch para obtener nombre de la zona
     Fetch2();
+  }, []);
 
+  useEffect(()=>{
     const intervalo = setInterval(() => {
       Siguiente();
+      console.log("a")
     }, 4000);
 
     sliders.current.addEventListener("mouseenter", () => {
       clearInterval(intervalo);
     });
-  }, [1]);
+  })
 
-/*const ff = () => {
-  sliders.current.style.width=``
-}*/
+const ff = (slider) => {
+  sliders.current.style.width=`${slider.length}00%`
+}
 
   const Fetch2 = () => {
     fetch(`http://localhost:8080/zone/2`, {

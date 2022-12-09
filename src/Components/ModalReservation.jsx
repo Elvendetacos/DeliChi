@@ -82,7 +82,7 @@ const Modal = ({ open, onClose, idUser }) => {
                 </div>
               </div>
             </div>
-            <button onClick={onClose}>aceptar</button>
+            <button className="acept-reservation" onClick={onClose}>Aceptar</button>
           </div>
         </div>
       </div>
